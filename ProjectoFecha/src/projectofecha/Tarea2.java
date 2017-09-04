@@ -69,7 +69,7 @@ public class Customer{
 
 }                               
 
-public class Bank{                      
+public class Bank{                          //a la grande le puse cuca
     private Customer[] clients;
     private int numberOfCustomers;
     
@@ -81,6 +81,16 @@ public class Bank{
 }
 
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author asaelrivas
+ */
 public class Tarea2 {
     
 }
