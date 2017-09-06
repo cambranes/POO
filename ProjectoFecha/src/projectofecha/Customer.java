@@ -47,6 +47,13 @@ public class Customer{
     public Account getAccount(){                
         return this.account;
     }
-
+    
+    public boolean equals(Object obj){
+        boolean flag = false;
+        
+        
+        
+        return flag;
+    }
 }                               
 

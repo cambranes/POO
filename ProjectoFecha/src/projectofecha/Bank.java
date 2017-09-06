@@ -28,5 +28,14 @@ public class Bank{
         return flag;
     }
     
-    
+    public boolean removeCustomer(Customer client){
+        boolean flag = false;
+        for(int i = 0; i<numberOfCustomers; i++){
+            clients[i]=clients[numberOfCustomers-1];
+            clients[numberOfCustomers-1] = null;
+            flag = true;
+        }
+        
+        return flag;
+    }
 }
