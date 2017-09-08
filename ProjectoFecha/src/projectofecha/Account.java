@@ -42,4 +42,9 @@ public class Account{
     public double getBalance (){
         return balance;
     }
+    
+    public String toString(){
+        return "ID Account: " +IDaccount +
+               " ,Balance: " + balance;
+    }
 }
