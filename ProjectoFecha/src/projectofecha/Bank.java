@@ -31,7 +31,7 @@ public class Bank{
     public boolean removeCustomer(int IDcustomer){
         boolean flag = false;
             for(int i = 0; i < numberOfCustomers; i++){
-                if(clients[i].getIDaccount() == IDcustomer){
+                if(clients[i].getIDCustomer() == IDcustomer){
                     clients[i] = clients[numberOfCustomers-1];
                     clients[numberOfCustomers-1] = null;
                     numberOfCustomers--;
@@ -42,10 +42,10 @@ public class Bank{
         return flag;
     }
     
-    public Customer searchAccount(int IDAccount){
+    public Customer searchClient(int IDClient){
         Customer temp = null;
         for(Customer client: clients){
-            if(client.getAccount().getID() == IDAccount){
+            if(client.getIDCustomer() == IDClient){
                 temp = client;
             }
         }

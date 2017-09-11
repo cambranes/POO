@@ -13,16 +13,27 @@ package projectofecha;
  * @AUTHORS: POO FMAT 
  */
 public class Account{                           
+    public static final String  CREDIT= "CREDIT";
+    public static final String DEBIT = "DEBIT";
+    
     private static int IDkey;
     private int IDaccount;
     private double balance; 
+    private String typeAccount;
     
-    public Account (double balance) {               
+    public Account (String typeAccount, double balance) {               
+        this.IDaccount =IDkey;
+        IDkey++;
+        this.typeAccount = typeAccount;
+        this.balance = balance;
+    }
+    
+    /*public Account (double balance) {               
         this.IDaccount =IDkey;
         IDkey++;
         this.balance = balance;
     }
-    
+    */
     public double withdraw(double ammount){
         if(balance>=ammount){
             balance = balance - ammount;
@@ -43,12 +54,13 @@ public class Account{
         return balance;
     }
     
-    public int getID(){
+    public int getIDAccount(){
         return this.IDaccount;
     }
     
     public String toString(){
         return "ID Account: " +IDaccount +
+               ", Type: " + typeAccount+
                " ,Balance: " + balance;
     }
 }
