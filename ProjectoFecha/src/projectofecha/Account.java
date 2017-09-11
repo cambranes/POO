@@ -43,6 +43,10 @@ public class Account{
         return balance;
     }
     
+    public int getID(){
+        return this.IDaccount;
+    }
+    
     public String toString(){
         return "ID Account: " +IDaccount +
                " ,Balance: " + balance;

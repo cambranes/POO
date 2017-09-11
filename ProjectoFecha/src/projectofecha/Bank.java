@@ -42,6 +42,16 @@ public class Bank{
         return flag;
     }
     
+    public Customer searchAccount(int IDAccount){
+        Customer temp = null;
+        for(Customer client: clients){
+            if(client.getAccount().getID() == IDAccount){
+                temp = client;
+            }
+        }
+        return temp;
+    }
+    
     public String toString(){
       String output= "";
       for(int i = 0; i < numberOfCustomers; i++){

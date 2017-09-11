@@ -27,9 +27,10 @@ public class TestBank {
        narcobanco.addCustomer(client5);
        
        System.out.println(narcobanco);
-       
        narcobanco.removeCustomer(2);
        System.out.println(narcobanco);
+       
+       System.out.println(narcobanco.searchAccount(1));
 
    
    }
