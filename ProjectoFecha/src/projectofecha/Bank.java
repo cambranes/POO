@@ -28,14 +28,38 @@ public class Bank{
         return flag;
     }
     
-    public boolean removeCustomer(Customer client){
+    public boolean removeCustomer(int IDcustomer){
         boolean flag = false;
-        for(int i = 0; i<numberOfCustomers; i++){
-            clients[i]=clients[numberOfCustomers-1];
-            clients[numberOfCustomers-1] = null;
-            flag = true;
-        }
+            for(int i = 0; i < numberOfCustomers; i++){
+                if(clients[i].getIDCustomer() == IDcustomer){
+                    clients[i] = clients[numberOfCustomers-1];
+                    clients[numberOfCustomers-1] = null;
+                    numberOfCustomers--;
+                    flag = true;
+                }
+            }
         
         return flag;
     }
+    
+    public Customer searchClient(int IDClient){
+        Customer temp = null;
+        for(Customer client: clients){
+            if(client.getIDCustomer() == IDClient){
+                temp = client;
+            }
+        }
+        return temp;
+    }
+    
+    public String toString(){
+      String output= "";
+      for(int i = 0; i < numberOfCustomers; i++){
+          output += clients[i].toString() +"\n";
+      }
+      return output;
+    }
+    
+    
+    
 }
