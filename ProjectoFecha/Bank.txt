@@ -1,0 +1,8 @@
+0,Maria,Magdalena,Cohauila,0,300,CREDIT,1,200,DEBIT,2,5000,DEBIT
+1,Bruno,Batman,Caballero,3,4
+2,Guido,Mista,5
+3,Damasco,Royale,6,7
+4,Yono,Coma,8
+5,pancho,fraco,2, 82,23
+6,pao,fso,54, 45,23
+7,pedro,colli,02, 82,23
