@@ -3,19 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bankingProyect;
-
-import bank.UI.BankUI;
+package bankbuilder;                //construir la clase de bank builder
 
 /**
  *
- * @author edgar.cambranes
+ * @author kevin
  */
-public class Main {
-    
-   public static void main(String[] args) {
-        new BankUI();
-   
-   }
+public class bankbuilder {
     
 }
