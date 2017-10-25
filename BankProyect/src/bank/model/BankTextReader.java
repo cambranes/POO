@@ -2,6 +2,7 @@ package bank.model;
 
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Scanner;
 
 public class BankTextReader {
@@ -26,5 +27,20 @@ public class BankTextReader {
            }
               return bankCustomer;
        }
-   
+   public Hashtable<String, String> bankHashReader(String filename){
+       int i;
+       ArrayList<String> array = new ArrayList<>();
+       Hashtable<String, String> table = new Hashtable<>();
+       array = bankReader(filename);
+       String[] split;
+       String line;
+       String key;
+       for(i=0;i<array.size();i++){
+           line = array.get(i);
+           split = line.split(",", 4);
+           key = split[1] + split[2];
+           table.put(key, line);
+       }
+       return table;
+   }
 }
