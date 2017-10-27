@@ -6,6 +6,7 @@
 package bank.UI;
 
 import bank.controller.BankTextController;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,7 +25,7 @@ public class BankUI extends javax.swing.JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setTitle("Proyecto Banco");
-        cargarModeloTabla();
+        //cargarModeloTabla();
     }
 
     /**
@@ -158,22 +159,27 @@ public class BankUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    //Metodo que corre al presionar el boton. Busca un elemento en un Hashtable,
+    //y lo coloca en una tabla
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String key;
-        int i,j;
         key = jTextField1.getText();
         BankTextController control = new BankTextController(); 
-        String[][] table = control.searchHash(key);
-        for(i=0;i<table.length;i++){
-            for(j=0;j<4;j++){
-                modelo.setValueAt(table[i][j], i, j);
-            }
+        //Llama a la funcion de controller que busca el elemento en el HashTable
+        String[][] table = control.getHashTable(key);
+        //Si el elemento existe, lo coloca en la tabla
+        if(table!=null){
+            cargarModeloTabla(table);
+        }
+        //Si el elemento no existe, crea una ventana mostrando que el elemento no existe
+        else{
+            JOptionPane.showMessageDialog(this, "Key not found", "Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     //Este metodo carga el modewlo la tabla
-    public void cargarModeloTabla(){
+    public void cargarModeloTabla(String[][] lista){
         /*
         Cuando un JScrollPane contiene a un JTable, se pueden configurar para 
         que aparezcan las barras horizontal y vertical del scrollpane, 
@@ -193,7 +199,6 @@ public class BankUI extends javax.swing.JFrame {
         modelo.addColumn(nombres[2]);
 	
         //Funcion que retornara la matriz de strings para actualizar la matriz
-        String[][] lista = control.getTable("Bank.txt");
         int numFilas = lista.length;
         int numcolumnas = 0;
         int valor;
