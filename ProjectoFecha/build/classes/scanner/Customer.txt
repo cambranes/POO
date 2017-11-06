@@ -1,3 +1,0 @@
-01,pancho,fraco,2, 82,23
-02,pao,fso,54, 45,23
-03,pedro,colli,02, 82,23
