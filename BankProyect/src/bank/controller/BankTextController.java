@@ -8,6 +8,9 @@ package bank.controller;
 import java.util.ArrayList;
 import bank.model.BankTextReader;
 import java.util.Hashtable;
+import java.sql.ResultSet;
+import bank.DB.DBQuery;
+import java.sql.SQLException;
 
 /**
  *
@@ -88,4 +91,28 @@ public class BankTextController {
         }
         return finalOutput;
     }
+    /*
+    public String[][] searchMYSQL(String input){
+        String[] split = input.split(" ");
+        String FN = split[0];
+        String LN = split[1];
+        String[][] output = new String[4][1];
+        //NEcesito que el ResultSet que reciba sea una tabla ID,FN,LN,AccountID con 
+        //mas de un elemento...
+        try{
+        ResultSet rs = new DBQuery().getCustomersAccountsInfo(FN, LN);
+        while(rs.next()){
+            String IDCustomer = rs.getString("IDCustomer");
+            output[0][0] = IDCustomer;
+            output[1][0] = rs.getString("FirstName");
+            output[2][0] = rs.getString("LastName");
+            output[3][0] = "";
+        }
+        }    
+        catch(SQLException ex){
+           System.out.println(ex.getMessage());
+        }
+        return output;
+    }
+    */
 }

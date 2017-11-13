@@ -11,7 +11,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -89,14 +88,8 @@ public class DBConnection {
         return flag;
     }
     
-    public static void main(String args[]){
-        try{
-        Connection conn = new DBConnection().getConnection();
-        conn.close();
-        }
-        catch(SQLException ex){
-            System.out.println(ex.getMessage());
-        }
-    }
+    
+
+  
 }
 
