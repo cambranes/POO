@@ -1,0 +1,4 @@
+dbms mysql
+serverName localhost
+portNumber 3306
+dbName bank

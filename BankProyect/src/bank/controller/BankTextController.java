@@ -51,35 +51,41 @@ public class BankTextController {
     //un apuntador null
     public String[][] getHashTable(String key)
     {
-        int j;
+        int i,j;
         BankTextReader bankBuilder = new BankTextReader();
-        Hashtable<String,String> input = bankBuilder.bankHashReader("Bank.txt");
-        String[][] output = new String[0][4];
+        Hashtable<String,ArrayList<String>> input = bankBuilder.bankHashReader("Bank.txt");
         //Si existe el elemento
+        String[][] finalOutput;
         if(input.containsKey(key)){
             String line;
             String accounts;
             String[] split;
+            ArrayList<String> content = input.get(key);
+            String[][] output = new String[content.size()][4];
             //Recibe la linea del .txt correspondiente
-            line = input.get(key);
-            //y lo divide en los elementos necesarios para mostrarlo en una tabla
-            split = line.split(",");
-            //colocandolos en la matriz output
-            for(j=0;j<3;j++){
-                output[0][j] = split[j];
+            for(i=0;i<content.size();i++){
+                line = content.get(i);
+            
+                //y lo divide en los elementos necesarios para mostrarlo en una tabla
+                split = line.split(",");
+                //colocandolos en la matriz output
+                for(j=0;j<3;j++){
+                    output[i][j] = split[j];
+                }
+                //acomoda todos los IDAccount en un solo elemento de la matriz
+                accounts = split[3];
+                for(j=6;j<split.length;j++){
+                    accounts = accounts + ", " + split[j];
+                    j = j + 2;
+                }
+                output[i][3] = accounts;
             }
-            //acomoda todos los IDAccount en un solo elemento de la matriz
-            accounts = split[3];
-            for(j=6;j<split.length;j++){
-                accounts = accounts + ", " + split[j];
-                j = j + 2;
-            }
-            output[0][3] = accounts;
+            finalOutput = output;
         }
         //Si el elemento no existe, se devuelve null
         else{
-            output = null;
+            finalOutput = null;
         }
-        return output;
+        return finalOutput;
     }
 }

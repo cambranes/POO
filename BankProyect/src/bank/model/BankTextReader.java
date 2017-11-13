@@ -29,11 +29,11 @@ public class BankTextReader {
        }
    //Funcion que recibe el nombre de un archivo, lo pasa a bankReader para
    //convertir el ArrayList a un HashTable
-   public Hashtable<String, String> bankHashReader(String filename){
+   public Hashtable<String, ArrayList<String>> bankHashReader(String filename){
        int i;
        //Recibe el ArrayList usando bankReader
        ArrayList<String> array = bankReader(filename);
-       Hashtable<String, String> table = new Hashtable<>();
+       Hashtable<String, ArrayList<String>> table = new Hashtable<>();
        String[] split;
        String line;
        String key;
@@ -43,8 +43,20 @@ public class BankTextReader {
            split = line.split(",", 4);
            //Key es el FirstName + LastName
            key = split[1] + split[2];
-           table.put(key, line);
+           ArrayList<String> content = new ArrayList<>();
+           if(table.containsKey(key)){
+               content.clear();
+               content = table.get(key);
+               content.add(line);
+               table.replace(key, content);
+           }
+           else{
+               content.clear();
+               content.add(line);
+               table.put(key, content);
+           }    
        }
+       System.out.println(table.toString());
        return table;
    }
 }
