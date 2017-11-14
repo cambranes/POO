@@ -1,4 +1,0 @@
-dbms,mysql,
-serverName,localhost,
-serverPort,3306,
-database,bank,
