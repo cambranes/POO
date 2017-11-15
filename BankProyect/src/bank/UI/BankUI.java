@@ -68,7 +68,7 @@ public class BankUI extends javax.swing.JFrame {
 
         jLabel2.setText("Key");
 
-        jLabel3.setText("Key = FN + LN (Sin espacios)");
+        jLabel3.setText("Key = FN + LN ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -167,7 +167,7 @@ public class BankUI extends javax.swing.JFrame {
         key = jTextField1.getText();
         BankTextController control = new BankTextController(); 
         //Llama a la funcion de controller que busca el elemento en el HashTable
-        String[][] table = control.getHashTable(key);
+        String[][] table = control.searchMYSQL(key);
         //Si el elemento existe, lo coloca en la tabla
         if(table!=null){
             cargarModeloTabla(table);
@@ -193,6 +193,7 @@ public class BankUI extends javax.swing.JFrame {
 		
 		
 	//obtener nombres
+        modelo.setColumnCount(0);
 	String nombres[] = control.getHeader();
 	modelo.addColumn(nombres[0]);
         modelo.addColumn(nombres[1]);

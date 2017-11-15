@@ -91,28 +91,35 @@ public class BankTextController {
         }
         return finalOutput;
     }
-    /*
+    
     public String[][] searchMYSQL(String input){
         String[] split = input.split(" ");
         String FN = split[0];
         String LN = split[1];
-        String[][] output = new String[4][1];
+        String[][] fini = null;
         //NEcesito que el ResultSet que reciba sea una tabla ID,FN,LN,AccountID con 
         //mas de un elemento...
         try{
-        ResultSet rs = new DBQuery().getCustomersAccountsInfo(FN, LN);
-        while(rs.next()){
-            String IDCustomer = rs.getString("IDCustomer");
-            output[0][0] = IDCustomer;
-            output[1][0] = rs.getString("FirstName");
-            output[2][0] = rs.getString("LastName");
-            output[3][0] = "";
+        DBQuery query = new DBQuery();
+        ResultSet rs = query.getCustomersAccountsInfo(FN, LN);
+        rs.last();
+        int rows = rs.getRow();
+        String[][] output = new String[rows][4];
+        int i;
+        for(i=0;i<rows;i++){
+            rs.absolute(i+1);
+            output[i][0] = rs.getString("IDCustomer");
+            output[i][1] = rs.getString("FirstName");
+            output[i][2] = rs.getString("LastName");
+            output[i][3] = rs.getString("IDAccount");
         }
+        fini = output;
+        query.closeConn();
         }    
         catch(SQLException ex){
            System.out.println(ex.getMessage());
         }
-        return output;
+        return fini;
     }
-    */
+    
 }
