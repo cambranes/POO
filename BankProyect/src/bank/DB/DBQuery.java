@@ -13,19 +13,21 @@ import java.sql.*;
  * @author edgar.cambranes
  */
 public class DBQuery {
-    private Connection connection;
+    private DBConnection dbconnection;
     private Statement query;
     private ResultSet resultset;
     
     
 public ResultSet getCustomersAccountsInfo(String FN, String LN){
-    String SQLquery ="select * from bank.Customers where "+
-                     "FirstName=\'" +FN + "\' and "+
-                     "LastName=\'" +LN + "\'";
+    String SQLquery ="SELECT C.idCustomer, FirstName, LastName, idAccount "+
+                     "FROM Customers C, Accounts A "+
+                     "WHERE FirstName=\'" +FN + "\' and "+
+                     "LastName=\'" +LN + "\' and "+
+                     "C.idCustomer = A.idCustomer";
     
-    System.out.println(SQLquery);
     try{
-        connection = new DBConnection().getConnection();
+        dbconnection = new DBConnection();
+        Connection connection = dbconnection.getConnection();
         query = connection.createStatement();
         resultset = query.executeQuery(SQLquery);
         
@@ -36,6 +38,12 @@ public ResultSet getCustomersAccountsInfo(String FN, String LN){
     
     return resultset;
 }
+
+public void closeDBQuery(){
+    dbconnection.closeConnection();
+}
+
+
 public static void main(String args[]){
        
     try{
@@ -44,7 +52,8 @@ public static void main(String args[]){
         while(rs.next()){
         records += rs.getInt("idCustomer")+ "\t" +
                    rs.getString("FirstName") + "\t" +
-                   rs.getString("LastName");
+                   rs.getString("LastName")+ "\t" +
+                   rs.getString("idAccount")+"\n" ;
         }
         System.out.println(records);
     
