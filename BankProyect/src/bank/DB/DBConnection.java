@@ -35,7 +35,7 @@ public class DBConnection {
     private void getCredentials(){
     connectionProps = new Properties();
     connectionProps.put("user", "root");
-    connectionProps.put("password", "root");
+    connectionProps.put("password", "12345678");
         
     }
     
