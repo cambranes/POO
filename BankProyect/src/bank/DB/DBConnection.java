@@ -56,7 +56,6 @@ public class DBConnection {
     }
     
     public Connection getConnection() throws SQLException{
-        Connection connection = null;
         getDBStrings(getDBURLinfo());
         connectionProps = getCredentials();
         if (this.dbms.equals("mysql")) {

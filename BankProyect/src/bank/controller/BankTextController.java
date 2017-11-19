@@ -122,4 +122,10 @@ public class BankTextController {
         return fini;
     }
     
+    public boolean addMysql(String FN, String LN){
+        boolean flag = false;
+        
+        return flag;
+    }
+    
 }
