@@ -19,9 +19,10 @@ public class DBQuery {
     
     
 public ResultSet getCustomersAccountsInfo(String FN, String LN){
-    String SQLquery ="select * from bank.Customers where "+
+    String SQLquery ="SELECT C.idCustomer, FirstName, LastName from"
+            + " accounts A, customers C  where "+
                      "FirstName=\'" +FN + "\' and "+
-                     "LastName=\'" +LN + "\'";
+                     "LastName=\'" +LN + "\' and A.idCustomer = C.idCustomer ";
     
     System.out.println(SQLquery);
     try{
@@ -39,7 +40,7 @@ public ResultSet getCustomersAccountsInfo(String FN, String LN){
 public static void main(String args[]){
        
     try{
-        ResultSet  rs = new DBQuery().getCustomersAccountsInfo("Maria", "Moreno");
+        ResultSet  rs = new DBQuery().getCustomersAccountsInfo("jose", "alameda");
         String records ="";
         while(rs.next()){
         records += rs.getInt("idCustomer")+ "\t" +
