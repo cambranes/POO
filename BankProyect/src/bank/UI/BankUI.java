@@ -91,6 +91,11 @@ public class BankUI extends javax.swing.JFrame {
         });
 
         jButton3.setText("MODIFICAR USUARIO");
+        jButton3.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                jButton3ComponentHidden(evt);
+            }
+        });
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -215,7 +220,6 @@ public class BankUI extends javax.swing.JFrame {
         String name=split[0];
         String lname=split[1];
         
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -233,8 +237,12 @@ public class BankUI extends javax.swing.JFrame {
             abrir.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jButton3ComponentHidden
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ComponentHidden
+
     //Este metodo carga el modewlo la tabla
-    public void cargarModeloTabla(String[][] lista){
+    //public void cargarModeloTabla(String[][] lista){
         /*
         Cuando un JScrollPane contiene a un JTable, se pueden configurar para 
         que aparezcan las barras horizontal y vertical del scrollpane, 
@@ -242,13 +250,13 @@ public class BankUI extends javax.swing.JFrame {
         a que la tabla tiene habilitada la opcion de autoresize. Deshabilitando 
         esta opcion, aparecera sin problemas la barra horizontal.
         */
-        BankTextController control = new BankTextController();
+        /**BankTextController control = new BankTextController();
         tablaBanco.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tablaBanco.doLayout();
 		
 		
 	//obtener nombres
-	String nombres[] = control.getHeader();
+	//String nombres[] = control.getHeader();
         
 	modelo.addColumn(nombres[0]);
         modelo.addColumn(nombres[1]);
@@ -285,7 +293,7 @@ public class BankUI extends javax.swing.JFrame {
             }
         }
         
-    }
+    }*/
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
