@@ -222,21 +222,27 @@ public class BankUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    //editar usuario
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         EditUser abrir = new EditUser();
         abrir.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    //borrar usuario
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         DeleteUser abrir = new DeleteUser();
         abrir.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    //añadir usuario
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
             AddUser abrir = new AddUser();
             abrir.setVisible(true);
+            abrir.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    
+    //funciones escondidas del jbutton
     private void jButton3ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jButton3ComponentHidden
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ComponentHidden
