@@ -1,3 +1,6 @@
+/*cuando se escribio este código solo dios y yo sabíamos que hace exactamente
+ahora solo dios sabe lo que hace todo este codigo*/
+
 package bank.UI;
 
 import bank.controller.BankTextController;
@@ -78,7 +81,7 @@ public class BankUI extends javax.swing.JFrame {
 
         jLabel2.setText("Key");
 
-        jLabel3.setText("Key = FN + LN (Sin espacios)");
+        jLabel3.setText("Key = FN + LN (un solo espacio)");
 
         jButton2.setText("AÑADIR USUARIO");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -210,18 +213,9 @@ public class BankUI extends javax.swing.JFrame {
         key = jTextField1.getText();
         String[] split = key.split(" ");
         String name=split[0];
-        String lname=split[1];			
-        BankTextController control = new BankTextController(); 
-        //Llama a la funcion de controller que busca el elemento en el HashTable
-        String[][] table = control.getTable(key);
-        //Si el elemento existe, lo coloca en la tabla
-        if(table!=null){
-            cargarModeloTabla(table);
-        }
-        //Si el elemento no existe, crea una ventana mostrando que el elemento no existe
-        else{
-            JOptionPane.showMessageDialog(this, "Key not found", "Error", JOptionPane.WARNING_MESSAGE);
-        }
+        String lname=split[1];
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -255,6 +249,7 @@ public class BankUI extends javax.swing.JFrame {
 		
 	//obtener nombres
 	String nombres[] = control.getHeader();
+        
 	modelo.addColumn(nombres[0]);
         modelo.addColumn(nombres[1]);
         modelo.addColumn(nombres[2]);
@@ -263,7 +258,9 @@ public class BankUI extends javax.swing.JFrame {
         int numFilas = lista.length;
         int numcolumnas = 0;
         int valor;
-        for(int i = 0; i<numFilas; i++){
+        
+        for(int i = 0; i<numFilas; i++)
+        {
             valor = lista[i].length;
             if(valor > numcolumnas){
                 numcolumnas = valor;

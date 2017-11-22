@@ -11,7 +11,7 @@ import java.util.Hashtable;
 public class BankTextController {
     
     //metodo para generar el hashtable
-    public String[][] getTable(String Filename){
+    /*public String[][] getTable(String Filename){
         
         int i;
         int j;
@@ -43,7 +43,7 @@ public class BankTextController {
             }
         }
         return output;
-    }
+    }*/
     
     public String[] getHeader(){
         String[] header = {"ID","First Name","Last Name","Accounts"};
