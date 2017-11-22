@@ -151,7 +151,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="a&#xf1;adir usuario"/>
+            <Property name="text" type="java.lang.String" value="A&#xd1;ADIR USUARIO"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">

@@ -68,7 +68,7 @@ public class BankUI extends javax.swing.JFrame {
 
         jLabel3.setText("Key = FN + LN (Sin espacios)");
 
-        jButton2.setText("añadir usuario");
+        jButton2.setText("AÑADIR USUARIO");
 
         jButton3.setText("MODIFICAR USUARIO");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
