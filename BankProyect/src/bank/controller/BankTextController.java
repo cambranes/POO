@@ -104,6 +104,7 @@ public class BankTextController {
         ResultSet rs = query.getCustomersAccountsInfo(FN, LN);
         rs.last();
         int rows = rs.getRow();
+        if(rows!=0){
         String[][] output = new String[rows][4];
         int i;
         for(i=0;i<rows;i++){
@@ -114,12 +115,48 @@ public class BankTextController {
             output[i][3] = rs.getString("IDAccount");
         }
         fini = output;
+        }
         query.closeConn();
         }    
         catch(SQLException ex){
            System.out.println(ex.getMessage());
         }
         return fini;
+    }
+    
+    public boolean deleteMYSQL(String key){
+        String[] split = key.split(" ");
+        String FN = split[0];
+        String LN = split[1];
+        boolean flag = false;
+        DBQuery query = new DBQuery();
+        try{
+        ResultSet rs = query.deleteCustomerInfo(FN,LN);
+        rs.last();
+        if(rs.getRow()==0){
+            flag = true;
+        }
+        }
+        catch(SQLException ex){
+           System.out.println(ex.getMessage());
+        }
+        return flag;
+    }
+    
+    public void addMYSQLentry(String key){
+        String[] split = key.split(" ");
+        String FN = split[0];
+        String LN = split[1];
+        DBQuery query = new DBQuery();
+        query.addNewCustomerInfo(FN,LN);
+    }
+    
+    public void updateMYSQL(String key, String NFN, String NLN){
+        String[] split = key.split(" ");
+        String FN = split[0];
+        String LN = split[1];
+        DBQuery query = new DBQuery();
+        query.updateCustomerInfo(FN,LN,NFN,NLN);
     }
     
     public boolean addMysql(String FN, String LN){

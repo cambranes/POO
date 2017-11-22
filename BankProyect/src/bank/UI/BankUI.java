@@ -6,6 +6,8 @@
 package bank.UI;
 
 import bank.controller.BankTextController;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -212,15 +214,61 @@ public class BankUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        // ADD
+        String key;
+        key = jTextField1.getText();
+        BankTextController control = new BankTextController(); 
+        //Llama a la funcion de controller que busca el elemento en el HashTable
+        String[][] table = control.searchMYSQL(key);
+        //Si el elemento existe, lo coloca en la tabla
+        if(table!=null){
+            JOptionPane.showMessageDialog(this, "Key already exists", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+        //Si el elemento no existe, crea una ventana mostrando que el elemento no existe
+        else{
+            control.addMYSQLentry(key);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        // DELETE
+        String key;
+        key = jTextField1.getText();
+        BankTextController control = new BankTextController(); 
+        //Llama a la funcion de controller que busca el elemento en el HashTable
+        String[][] table = control.searchMYSQL(key);
+        //Si el elemento existe, lo coloca en la tabla
+        if(table!=null){
+            if(control.deleteMYSQL(key)==true){
+                JOptionPane.showMessageDialog(this, "Accounts empty. Can delete!", "Error", JOptionPane.WARNING_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Account not empty. Cannot delete", "Error", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        //Si el elemento no existe, crea una ventana mostrando que el elemento no existe
+        else{
+            JOptionPane.showMessageDialog(this, "Key not found. Cannot delete", "Error", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        // UPDATE
+        String key;
+        key = jTextField1.getText();
+        BankTextController control = new BankTextController(); 
+        //Llama a la funcion de controller que busca el elemento en el HashTable
+        String[][] table = control.searchMYSQL(key);
+        //Si el elemento existe, lo coloca en la tabla
+        if(table!=null){
+            String NFN = JOptionPane.showInputDialog("New First Name");
+            String NLN = JOptionPane.showInputDialog("New Last Name");
+            control.updateMYSQL(key,NFN,NLN);
+        }
+        //Si el elemento no existe, crea una ventana mostrando que el elemento no existe
+        else{
+            JOptionPane.showMessageDialog(this, "Key not found. Cannot update", "Error", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     //Este metodo carga el modewlo la tabla
@@ -243,6 +291,7 @@ public class BankUI extends javax.swing.JFrame {
 	modelo.addColumn(nombres[0]);
         modelo.addColumn(nombres[1]);
         modelo.addColumn(nombres[2]);
+        
 	
         //Funcion que retornara la matriz de strings para actualizar la matriz
         int numFilas = lista.length;
@@ -268,11 +317,54 @@ public class BankUI extends javax.swing.JFrame {
         numcolumnas = 0;
         for(int i = 0; i<numFilas; i++){
             numcolumnas = lista[i].length;
+            
             for(int j = 0; j<numcolumnas; j++){
                 modelo.setValueAt(lista[i][j], i, j);
             }
         }
-        
+        tablaBanco.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            int row = tablaBanco.rowAtPoint(e.getPoint());
+            int column = tablaBanco.columnAtPoint(e.getPoint());
+            // do some action if appropriate column
+            switch (row){
+                case 4:
+                    delete(column);
+                    break;
+                case 5:
+                    update(column);
+                    break;
+            }
+    
+  }
+});
+    }
+    public void delete(int column){
+        // DELETE
+        String key;
+        key = jTextField1.getText();
+        BankTextController control = new BankTextController(); 
+        //Llama a la funcion de controller que busca el elemento en el HashTable
+        String[][] table = control.searchMYSQL(key);
+        //Si el elemento existe, lo coloca en la tabla
+        if(table!=null){
+            //Check if can delete****deleteMYSQL(key);
+        }
+        //Si el elemento no existe, crea una ventana mostrando que el elemento no existe
+        else{
+            JOptionPane.showMessageDialog(this, "Key not found. Cannot delete", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    
+    public void update(int column){
+        String key;
+        key = (String) modelo.getValueAt(0, column);
+        BankTextController control = new BankTextController(); 
+        //Llama a la funcion de controller que busca el elemento en el HashTable
+        String[][] table = control.searchMYSQL(key);
+        //Si el elemento existe, lo coloca en la tabla
+        JOptionPane.showMessageDialog(this, "Customer with ID " + key + " updated succesfully", "UPDATE", JOptionPane.WARNING_MESSAGE);
     }
 
 
