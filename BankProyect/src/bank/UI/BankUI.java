@@ -226,6 +226,7 @@ public class BankUI extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         EditUser abrir = new EditUser();
         abrir.setVisible(true);
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     //borrar usuario
@@ -239,6 +240,7 @@ public class BankUI extends javax.swing.JFrame {
             AddUser abrir = new AddUser();
             abrir.setVisible(true);
             abrir.setVisible(false);
+            
     }//GEN-LAST:event_jButton2ActionPerformed
 
     

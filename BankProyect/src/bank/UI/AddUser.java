@@ -126,10 +126,14 @@ public class AddUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        //pendiente a modificar, este boton sirve para cerrar el frame de añadir usuario
-        
+        boolean cancel = true; 
+        cerrar(cancel);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public boolean cerrar(boolean cancel){
+        
+        return cancel;
+    }
     /**
      * @param args the command line arguments
      */
