@@ -165,7 +165,7 @@ public class BankUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         String key;
         key = jTextField1.getText();
-        BankTextController control = new BankTextController(); 
+        /*BankTextController control = new BankTextController(); 
         //Llama a la funcion de controller que busca el elemento en el HashTable
         String[][] table = control.getHashTable(key);
         //Si el elemento existe, lo coloca en la tabla
@@ -175,7 +175,7 @@ public class BankUI extends javax.swing.JFrame {
         //Si el elemento no existe, crea una ventana mostrando que el elemento no existe
         else{
             JOptionPane.showMessageDialog(this, "Key not found", "Error", JOptionPane.WARNING_MESSAGE);
-        }
+        }*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
     //Este metodo carga el modewlo la tabla
