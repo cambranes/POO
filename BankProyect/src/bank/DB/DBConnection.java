@@ -18,19 +18,25 @@ import java.util.Properties;
  */
 public class DBConnection {
     private Connection connection;
-    private Properties props; //Al usar la función getDbms();
+    private Properties props;
+    private String dbms = "mysql";  //Al usar la función getDbms();
                                     //obtenemos un valor null
-    private DBURLInfo info = new DBURLInfo();
-    private DBCredentials credInfo = new DBCredentials();
+    private DBURLInfo urlInfo;
+    private DBCredentials credInfo;
     
     public Connection getConnection() throws SQLException, FileNotFoundException  {
         props = new Properties();
+        credInfo = new DBCredentials();
         credInfo.getCredentials("DBCredentials.txt");
         props.put("user", credInfo.user);
         props.put("password", credInfo.password);
         
-        if (info.getDbms("DBURLInfo.txt").equals("mysql")) {
-            connection = DriverManager.getConnection(info.getURLInfo("DBURLInfo.txt"), props);
+        urlInfo = new DBURLInfo();
+        urlInfo.getURLInfo("DBURLInfo.txt");
+        if (urlInfo.dbms.equals("mysql")) {
+            connection = DriverManager.getConnection("jdbc:" + urlInfo.dbms 
+                    +"://" +urlInfo.serverName +":" +urlInfo.serverPort + "/" +
+                    urlInfo.database, props);
         }
         System.out.println("Connection established");
         return connection;

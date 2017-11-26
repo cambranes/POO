@@ -5,27 +5,43 @@
  */
 package bank.UI;
 
-import bank.controller.BankTextController;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import bank.controller.BankController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
- * @author luisj
+ * @author Kirbey
  */
 public class BankUI extends javax.swing.JFrame {
 
-    private DefaultTableModel modelo = new DefaultTableModel();
+    private final DefaultTableModel modelo = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column < 0;
+            }
+        };
+    private final BankController control = new BankController();
+    
     /**
      * Creates new form Ui
      */
     public BankUI() {
+        
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        this.setTitle("Proyecto Banco");
-        //cargarModeloTabla();
+        this.setTitle("Bank Project");
+        //Establezco la cabezera de las columnas
+	String nombres[] = control.getHeader();
+        for (String nombre : nombres) {
+            modelo.addColumn(nombre);
+        }
     }
 
     /**
@@ -37,82 +53,502 @@ public class BankUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        addNewCustomerWindow = new javax.swing.JFrame();
+        awAccTypeComCBox = new javax.swing.JComboBox<>();
+        awCNameTF = new javax.swing.JTextField();
+        awCancelBtn = new javax.swing.JButton();
+        awAddCustomerBtn = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        awBalanceTF = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        awIDCustomerTF = new javax.swing.JTextField();
+        awIDAccountTF = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        modifyCustomerWindow = new javax.swing.JFrame();
+        jLabel4 = new javax.swing.JLabel();
+        modwChangeBtn = new javax.swing.JButton();
+        modwCustomerNameTF = new javax.swing.JTextField();
+        modwCancelBtn = new javax.swing.JButton();
+        addNewAccountWindow = new javax.swing.JFrame();
+        aawAccTypeComCBox = new javax.swing.JComboBox<>();
+        aawCancelBtn = new javax.swing.JButton();
+        aawAddCustomerBtn = new javax.swing.JButton();
+        aawBalanceTF = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        customerActionWindow = new javax.swing.JFrame();
+        cawDeleteCustomerBtn = new javax.swing.JButton();
+        cawModifyBtn = new javax.swing.JButton();
+        cawAddAccountBtn = new javax.swing.JButton();
+        cawCancelBtn = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        MainWindow = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaBanco = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        mwBankTable = new javax.swing.JTable();
+        mwSearchBtn = new javax.swing.JButton();
+        mwNameTF = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        mwAddNewCustomerBtn = new javax.swing.JButton();
+        mwSimilarBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
+        addNewCustomerWindow.setTitle("Add New Customer");
+        addNewCustomerWindow.setMinimumSize(new java.awt.Dimension(500, 200));
+        addNewCustomerWindow.setResizable(false);
+
+        awAccTypeComCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CREDIT", "DEBIT" }));
+        awAccTypeComCBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                awAccTypeComCBoxActionPerformed(evt);
+            }
+        });
+
+        awCNameTF.setToolTipText("ex. Maria Muñoz");
+
+        awCancelBtn.setText("Cancel");
+        awCancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                awCancelBtnActionPerformed(evt);
+            }
+        });
+
+        awAddCustomerBtn.setText("Add customer");
+        awAddCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                awAddCustomerBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("New customer name ");
+
+        awBalanceTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                awBalanceTFActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Balance");
+
+        jLabel7.setText("Account Type");
+
+        awIDCustomerTF.setEditable(false);
+        awIDCustomerTF.setFocusable(false);
+        awIDCustomerTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                awIDCustomerTFActionPerformed(evt);
+            }
+        });
+
+        awIDAccountTF.setEditable(false);
+        awIDAccountTF.setFocusable(false);
+        awIDAccountTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                awIDAccountTFActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("New default values ");
+
+        jLabel9.setText("idCustomer");
+
+        jLabel10.setText("idAccount");
+
+        javax.swing.GroupLayout addNewCustomerWindowLayout = new javax.swing.GroupLayout(addNewCustomerWindow.getContentPane());
+        addNewCustomerWindow.getContentPane().setLayout(addNewCustomerWindowLayout);
+        addNewCustomerWindowLayout.setHorizontalGroup(
+            addNewCustomerWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addNewCustomerWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(addNewCustomerWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addNewCustomerWindowLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addNewCustomerWindowLayout.createSequentialGroup()
+                        .addGroup(addNewCustomerWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(awCNameTF, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(addNewCustomerWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(addNewCustomerWindowLayout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(0, 84, Short.MAX_VALUE))
+                            .addComponent(awBalanceTF))
+                        .addGap(18, 18, 18)
+                        .addGroup(addNewCustomerWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(awAccTypeComCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(43, 43, 43))
+                    .addGroup(addNewCustomerWindowLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(awIDCustomerTF, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(awIDAccountTF, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addNewCustomerWindowLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(awCancelBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(awAddCustomerBtn)))
+                .addContainerGap())
+        );
+        addNewCustomerWindowLayout.setVerticalGroup(
+            addNewCustomerWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addNewCustomerWindowLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(addNewCustomerWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(addNewCustomerWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(awCNameTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(awBalanceTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(awAccTypeComCBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(addNewCustomerWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(addNewCustomerWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addNewCustomerWindowLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(addNewCustomerWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(awIDCustomerTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10)
+                            .addComponent(awIDAccountTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 81, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addNewCustomerWindowLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(addNewCustomerWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(awCancelBtn)
+                            .addComponent(awAddCustomerBtn))
+                        .addContainerGap())))
+        );
+
+        modifyCustomerWindow.setTitle("Modify Customer");
+        modifyCustomerWindow.setMinimumSize(new java.awt.Dimension(300, 180));
+        modifyCustomerWindow.setName("Add Customer"); // NOI18N
+        modifyCustomerWindow.setResizable(false);
+        modifyCustomerWindow.setType(java.awt.Window.Type.POPUP);
+
+        jLabel4.setText("New customer´s names");
+
+        modwChangeBtn.setText("Change");
+        modwChangeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modwChangeBtnActionPerformed(evt);
+            }
+        });
+
+        modwCustomerNameTF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        modwCancelBtn.setText("Cancel");
+        modwCancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modwCancelBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout modifyCustomerWindowLayout = new javax.swing.GroupLayout(modifyCustomerWindow.getContentPane());
+        modifyCustomerWindow.getContentPane().setLayout(modifyCustomerWindowLayout);
+        modifyCustomerWindowLayout.setHorizontalGroup(
+            modifyCustomerWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(modifyCustomerWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(modifyCustomerWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addGroup(modifyCustomerWindowLayout.createSequentialGroup()
+                        .addComponent(modwCustomerNameTF, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(modifyCustomerWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(modwCancelBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(modwChangeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        modifyCustomerWindowLayout.setVerticalGroup(
+            modifyCustomerWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(modifyCustomerWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(modifyCustomerWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(modwChangeBtn)
+                    .addComponent(modwCustomerNameTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(modwCancelBtn)
+                .addContainerGap())
+        );
+
+        addNewAccountWindow.setTitle("Add New Customer");
+        addNewAccountWindow.setFocusTraversalPolicyProvider(true);
+        addNewAccountWindow.setMinimumSize(new java.awt.Dimension(322, 150));
+        addNewAccountWindow.setResizable(false);
+
+        aawAccTypeComCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CREDIT", "DEBIT" }));
+        aawAccTypeComCBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aawAccTypeComCBoxActionPerformed(evt);
+            }
+        });
+
+        aawCancelBtn.setText("Cancel");
+        aawCancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aawCancelBtnActionPerformed(evt);
+            }
+        });
+
+        aawAddCustomerBtn.setText("Add account");
+        aawAddCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aawAddCustomerBtnActionPerformed(evt);
+            }
+        });
+
+        aawBalanceTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aawBalanceTFActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Balance");
+
+        jLabel13.setText("Account Type");
+
+        javax.swing.GroupLayout addNewAccountWindowLayout = new javax.swing.GroupLayout(addNewAccountWindow.getContentPane());
+        addNewAccountWindow.getContentPane().setLayout(addNewAccountWindowLayout);
+        addNewAccountWindowLayout.setHorizontalGroup(
+            addNewAccountWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addNewAccountWindowLayout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(aawCancelBtn)
+                .addGap(18, 18, 18)
+                .addComponent(aawAddCustomerBtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(addNewAccountWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(addNewAccountWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(aawBalanceTF, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGroup(addNewAccountWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(aawAccTypeComCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addGap(43, 43, 43))
+        );
+        addNewAccountWindowLayout.setVerticalGroup(
+            addNewAccountWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addNewAccountWindowLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(addNewAccountWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(addNewAccountWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(aawBalanceTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(aawAccTypeComCBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGroup(addNewAccountWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(aawCancelBtn)
+                    .addComponent(aawAddCustomerBtn))
+                .addContainerGap())
+        );
+
+        customerActionWindow.setMaximumSize(new java.awt.Dimension(425, 200));
+        customerActionWindow.setMinimumSize(new java.awt.Dimension(425, 200));
+        customerActionWindow.setPreferredSize(new java.awt.Dimension(425, 200));
+        customerActionWindow.setResizable(false);
+
+        cawDeleteCustomerBtn.setBackground(new java.awt.Color(240, 210, 210));
+        cawDeleteCustomerBtn.setText("Delete");
+        cawDeleteCustomerBtn.setActionCommand("Check if customer is deletable");
+        cawDeleteCustomerBtn.setMaximumSize(new java.awt.Dimension(112, 25));
+        cawDeleteCustomerBtn.setMinimumSize(new java.awt.Dimension(112, 25));
+        cawDeleteCustomerBtn.setPreferredSize(new java.awt.Dimension(112, 25));
+        cawDeleteCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cawDeleteCustomerBtnActionPerformed(evt);
+            }
+        });
+
+        cawModifyBtn.setBackground(new java.awt.Color(255, 255, 102));
+        cawModifyBtn.setText("Modify");
+        cawModifyBtn.setActionCommand("Modify customer name and last name");
+        cawModifyBtn.setMaximumSize(new java.awt.Dimension(112, 25));
+        cawModifyBtn.setMinimumSize(new java.awt.Dimension(112, 25));
+        cawModifyBtn.setPreferredSize(new java.awt.Dimension(112, 25));
+        cawModifyBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cawModifyBtnActionPerformed(evt);
+            }
+        });
+
+        cawAddAccountBtn.setBackground(new java.awt.Color(190, 240, 190));
+        cawAddAccountBtn.setText("Add account");
+        cawAddAccountBtn.setActionCommand("Modify customer name and last name");
+        cawAddAccountBtn.setMaximumSize(new java.awt.Dimension(112, 25));
+        cawAddAccountBtn.setMinimumSize(new java.awt.Dimension(112, 25));
+        cawAddAccountBtn.setPreferredSize(new java.awt.Dimension(112, 25));
+        cawAddAccountBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cawAddAccountBtnActionPerformed(evt);
+            }
+        });
+
+        cawCancelBtn.setText("Cancel");
+        cawCancelBtn.setActionCommand("Check if customer is deletable");
+        cawCancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cawCancelBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
+        jLabel11.setText("What do you want to do with this customer?");
+
+        javax.swing.GroupLayout customerActionWindowLayout = new javax.swing.GroupLayout(customerActionWindow.getContentPane());
+        customerActionWindow.getContentPane().setLayout(customerActionWindowLayout);
+        customerActionWindowLayout.setHorizontalGroup(
+            customerActionWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(customerActionWindowLayout.createSequentialGroup()
+                .addGap(175, 175, 175)
+                .addComponent(cawCancelBtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(customerActionWindowLayout.createSequentialGroup()
+                .addGap(0, 32, Short.MAX_VALUE)
+                .addGroup(customerActionWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(customerActionWindowLayout.createSequentialGroup()
+                        .addComponent(cawAddAccountBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cawModifyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cawDeleteCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel11))
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
+        customerActionWindowLayout.setVerticalGroup(
+            customerActionWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerActionWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11)
+                .addGap(18, 18, 18)
+                .addGroup(customerActionWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cawModifyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cawAddAccountBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cawDeleteCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55)
+                .addComponent(cawCancelBtn)
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Proyecto Banco");
+        setTitle("Bank Project");
+        setMinimumSize(new java.awt.Dimension(708, 421));
 
-        tablaBanco.setModel(modelo);
-        jScrollPane1.setViewportView(tablaBanco);
+        mwBankTable.setModel(modelo);
+        mwBankTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mwBankTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(mwBankTable);
 
-        jButton1.setText("Search");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        mwSearchBtn.setText("Search");
+        mwSearchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                mwSearchBtnActionPerformed(evt);
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        mwNameTF.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        mwNameTF.setToolTipText("ex. \"Maria Moreno\"");
+        mwNameTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                mwNameTFActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Key");
+        jLabel2.setText("Name");
 
-        jLabel3.setText("Key = FN + LN (Sin espacios)");
+        jLabel3.setText("FN + LN");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+        mwAddNewCustomerBtn.setText("Add new Customer");
+        mwAddNewCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mwAddNewCustomerBtnActionPerformed(evt);
+            }
+        });
+
+        mwSimilarBtn.setText("Similar");
+        mwSimilarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mwSimilarBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout MainWindowLayout = new javax.swing.GroupLayout(MainWindow);
+        MainWindow.setLayout(MainWindowLayout);
+        MainWindowLayout.setHorizontalGroup(
+            MainWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainWindowLayout.createSequentialGroup()
+                .addGroup(MainWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, MainWindowLayout.createSequentialGroup()
+                        .addGroup(MainWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(MainWindowLayout.createSequentialGroup()
+                                .addGap(222, 222, 222)
+                                .addComponent(jLabel3))
+                            .addGroup(MainWindowLayout.createSequentialGroup()
                                 .addGap(173, 173, 173)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(186, 186, 186)
-                                .addComponent(jLabel3)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(mwNameTF, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(mwSearchBtn)
+                                .addGap(18, 18, 18)
+                                .addComponent(mwSimilarBtn)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(MainWindowLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
+                .addGap(26, 26, 26)
+                .addComponent(mwAddNewCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        MainWindowLayout.setVerticalGroup(
+            MainWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MainWindowLayout.createSequentialGroup()
                 .addGap(4, 4, 4)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addGroup(MainWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mwSearchBtn)
+                    .addComponent(mwNameTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(mwSimilarBtn))
+                .addGroup(MainWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(MainWindowLayout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(MainWindowLayout.createSequentialGroup()
+                        .addGap(133, 133, 133)
+                        .addComponent(mwAddNewCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Proyecto Banco");
+        jLabel1.setText("BANK PROJECT");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -138,108 +574,466 @@ public class BankUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(MainWindow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(MainWindow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void mwNameTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mwNameTFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_mwNameTFActionPerformed
 
-    //Metodo que corre al presionar el boton. Busca un elemento en un Hashtable,
-    //y lo coloca en una tabla
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    //Al presionar el jButton1 se obtiene el String de jTextField1
+    private void mwSearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mwSearchBtnActionPerformed
         // TODO add your handling code here:
-        String key;
-        key = jTextField1.getText();
-        BankTextController control = new BankTextController(); 
-        //Llama a la funcion de controller que busca el elemento en el HashTable
-        String[][] table = control.getHashTable(key);
-        //Si el elemento existe, lo coloca en la tabla
-        if(table!=null){
-            cargarModeloTabla(table);
+        String nombre;
+        if(mwNameTF.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "This field can't be empty!",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            nombre=null;
         }
-        //Si el elemento no existe, crea una ventana mostrando que el elemento no existe
-        else{
-            JOptionPane.showMessageDialog(this, "Key not found", "Error", JOptionPane.WARNING_MESSAGE);
+        else {
+            nombre = mwNameTF.getText();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        String[][] table;
+        
+        try {
+            //Usamos el String como parámetro de getTable 
+            table = control.getTable(nombre);
+                int tableTotalRow = mwBankTable.getRowCount();
+                //Una vez obtenido el table limpiamos la tabla
+                for(int i = tableTotalRow-1; i >= 0; i--){
+                    modelo.removeRow(i);
+                }
+            //Cargamos la tabla y limpiamos la caja de texto
+            //si encontro algun resultado
+            if(table!=null){
+                loadTableModel(table);
+                mwNameTF.setText("");
+            }
+            //Si el customer no existe, se crea una ventana indicandolo
+            else{
+                JOptionPane.showMessageDialog(this, "Customer " +
+                        mwNameTF.getText()+" not found", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                        awCNameTF.setText(mwNameTF.getText());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BankUI.class.getName()).log(Level.WARNING, null, ex);
+        }
+    }//GEN-LAST:event_mwSearchBtnActionPerformed
 
-    //Este metodo carga el modewlo la tabla
-    public void cargarModeloTabla(String[][] lista){
-        /*
-        Cuando un JScrollPane contiene a un JTable, se pueden configurar para 
-        que aparezcan las barras horizontal y vertical del scrollpane, 
-        sin embargo la barra horizontal no aparece en un primer momento debido 
-        a que la tabla tiene habilitada la opcion de autoresize. Deshabilitando 
-        esta opcion, aparecera sin problemas la barra horizontal.
+    private void mwAddNewCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mwAddNewCustomerBtnActionPerformed
+        // TODO add your handling code here
+        addNewCustomerWindow.setVisible(true);
+        addNewCustomerWindow.setSize(400, 200);
+        addNewCustomerWindow.setLocationRelativeTo(null);
+        addNewCustomerWindow.setTitle("Add Customer");
+        try {
+            awCNameTF.setText(mwNameTF.getText());
+            awBalanceTF.setText("0");
+            awIDCustomerTF.setText("" +control.getNextIDCustomer());
+            awIDAccountTF.setText("" +control.getNextIDAccount());
+        } catch (SQLException ex) {
+            Logger.getLogger(BankUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mwAddNewCustomerBtnActionPerformed
+
+    private void cawModifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cawModifyBtnActionPerformed
+        // TODO add your handling code here:
+        int checker;
+        checker=this.mwBankTable.getSelectedRowCount();
+            if(checker == 0){
+                JOptionPane.showMessageDialog(this, "There isn't a selected row!",
+                        "Error", JOptionPane.WARNING_MESSAGE);
+            }
+            else if(checker >= 2){
+                JOptionPane.showMessageDialog(this, "There is 2 or more selected rows!",
+                        "Error", JOptionPane.WARNING_MESSAGE);
+            } else {
+            modifyCustomerWindow.setVisible(true);
+            modifyCustomerWindow.setLocationRelativeTo(this);
+        }
+        /*Para modificar desde la tabla
+        try{
+            int checker;
+            checker=this.bankTable.getSelectedRow();
+            if(checker==-1){
+                JOptionPane.showMessageDialog(this, "There isn't a selected row!",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Row " +checker+" selected!",
+                        "Info", JOptionPane.INFORMATION_MESSAGE);
+                String name =bankTable.getValueAt(bankTable.getSelectedRow(), 1).toString() +
+                " "+bankTable.getValueAt(bankTable.getSelectedRow(), 2).toString();
+                try {
+                    boolean modify;
+                    if(jTextField2.getText().isEmpty()==false){
+                        modify=control.existCustomer(jTextField2.getText());
+                        if(modify==false){
+                            control.modifyCustomerName(name, jTextField2.getText());
+                            JOptionPane.showMessageDialog(this, "Customer " +name +
+                            " has been changed successfully to " +jTextField2.getText()
+                            +"", "Notice", JOptionPane.INFORMATION_MESSAGE);
+                            modifyCustomerWindow.setVisible(false);
+                            jTextField1.setText(jTextField2.getText());
+                            jTextField2.setText("");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "The customer "
+                            +jTextField2.getText() + " already exist!",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                       }
+                   }
+                   //else {
+                    //    JOptionPane.showMessageDialog(modifyCustomerWindow, "This field can´t be empty!", JOptionPane.ERROR_MESSAGE);
+                    //}
+                } catch (SQLException ex) {
+                    Logger.getLogger(BankUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }catch(Exception ex) {
+            Logger.getLogger(BankUI.class.getName()).log(Level.WARNING, null, ex);
+        }
         */
-        BankTextController control = new BankTextController();
-        tablaBanco.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tablaBanco.doLayout();
-		
-		
-	//obtener nombres
-	String nombres[] = control.getHeader();
-	modelo.addColumn(nombres[0]);
-        modelo.addColumn(nombres[1]);
-        modelo.addColumn(nombres[2]);
-	
-        //Funcion que retornara la matriz de strings para actualizar la matriz
-        int numFilas = lista.length;
-        int numcolumnas = 0;
-        int valor;
-        for(int i = 0; i<numFilas; i++){
-            valor = lista[i].length;
-            if(valor > numcolumnas){
-                numcolumnas = valor;
+    }//GEN-LAST:event_cawModifyBtnActionPerformed
+
+    private void cawDeleteCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cawDeleteCustomerBtnActionPerformed
+        // TODO add your handling code here:
+        try{
+            //Tomamos de la primera fila los datos de la columna FirstName y
+            //LastName para usarlos como name
+            String name;
+            int checker;
+            checker=this.mwBankTable.getSelectedRowCount();
+            if(checker == 0){
+                JOptionPane.showMessageDialog(this, "There isn't a selected row!",
+                        "Error", JOptionPane.WARNING_MESSAGE);
             }
-        }
-		
-		
-        //Funcion Para agragar cuentas a las columnas de acuerdo a cuantas columnas se necesitaran
-        
-        int totalColumnas = numcolumnas - 3;//Num de columnas que faltan por nombrar
-        for(int j = 1; j<=totalColumnas; j++){
-            modelo.addColumn(nombres[3]);
-        }
-        //funcion para establecer el num de filas que abra en la tabla
-        modelo.setNumRows(numFilas);
-        //funcion para introducir los valores a la tabla
-        numcolumnas = 0;
-        for(int i = 0; i<numFilas; i++){
-            numcolumnas = lista[i].length;
-            for(int j = 0; j<numcolumnas; j++){
-                modelo.setValueAt(lista[i][j], i, j);
+            else if(checker >= 2){
+                JOptionPane.showMessageDialog(this, "There is 2 or more, selected rows!",
+                        "Error", JOptionPane.WARNING_MESSAGE);
             }
+            else {
+                //Obtiene FirstName and LastName de la fila seleccionada
+                name=mwBankTable.getValueAt(mwBankTable.getSelectedRow(), 1).toString() +
+                " "+mwBankTable.getValueAt(mwBankTable.getSelectedRow(), 2).toString();
+                //Comprobamos si todas las cuentas estan en 0 e imprimimos el
+                //resultado
+                if(control.accountsBalanceEqualsZero(name)){
+                    JOptionPane.showMessageDialog(this, "Customer " +name +
+                    " can be deleted", "Notice", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Customer " +
+                    name+" can't be deleted\nThis customer have almost"
+                    +" 1 account with balance different to 0", "Error",
+                    JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BankUI.class.getName()).log(Level.WARNING, null, ex);
         }
+    }//GEN-LAST:event_cawDeleteCustomerBtnActionPerformed
+
+    private void mwBankTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mwBankTableMouseClicked
+        // TODO add your handling code here:
+        if(evt.getClickCount()==2){
+            customerActionWindow.setVisible(true);
+            customerActionWindow.setTitle("Select an action");
+            customerActionWindow.setLocationRelativeTo(null);
+        } else {
+            //mwModifyBtn.setEnabled(false);
+            //mwDeleteCustomerBtn.setEnabled(false);
+            //mwAddAccountBtn.setEnabled(false);
+        }
+    }//GEN-LAST:event_mwBankTableMouseClicked
+
+    private void modwChangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modwChangeBtnActionPerformed
+        // TODO add your handling code here:
+        try {
+            String name =mwBankTable.getValueAt(mwBankTable.getSelectedRow(), 1).toString() +
+            " "+mwBankTable.getValueAt(mwBankTable.getSelectedRow(), 2).toString();
+            boolean modify;
+            if(modwCustomerNameTF.getText().isEmpty()==false){
+                modify=control.existCustomer(modwCustomerNameTF.getText());
+                if(modify==false){
+                    control.modifyCustomerName(name, modwCustomerNameTF.getText());
+                    JOptionPane.showMessageDialog(this, "Customer " +name +
+                    " has been changed successfully to " +modwCustomerNameTF.getText()
+                    +"", "Notice", JOptionPane.INFORMATION_MESSAGE);
+                    for(int i = mwBankTable.getRowCount()-1; i >= 0; i--){
+                        modelo.removeRow(i);
+                    }
+                    loadTableModel(control.getTable(modwCustomerNameTF.getText()));
+                    modifyCustomerWindow.setVisible(false);
+                    customerActionWindow.setVisible(false);
+                    modwCustomerNameTF.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(this, "The customer "
+                    +modwCustomerNameTF.getText() + " already exist!",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            /*else {
+                JOptionPane.showMessageDialog(modifyCustomerWindow, "This field can´t be empty!", JOptionPane.ERROR_MESSAGE);
+            }*/
+        } catch (SQLException ex) {
+            Logger.getLogger(BankUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_modwChangeBtnActionPerformed
+
+    private void modwCancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modwCancelBtnActionPerformed
+        // TODO add your handling code here:
+        modifyCustomerWindow.setVisible(false);
+    }//GEN-LAST:event_modwCancelBtnActionPerformed
+
+    private void awAccTypeComCBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_awAccTypeComCBoxActionPerformed
+        // TODO add your handling code here:
+        /*Añadir validación de numeros negativos
+        if(awAccTypeComCBox.getSelectedItem().toString().equals("DEBIT")){
+        }
+        else if (awAccTypeComCBox.getSelectedItem().toString().equals("CREDIT")){
+        }
+        */
+        //evt.getActionCommand();
+    }//GEN-LAST:event_awAccTypeComCBoxActionPerformed
+
+    private void awBalanceTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_awBalanceTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_awBalanceTFActionPerformed
+
+    private void awCancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_awCancelBtnActionPerformed
+        // TODO add your handling code here:
+        addNewCustomerWindow.setVisible(false);
+        awCNameTF.setText("");
+        awBalanceTF.setText("0");
+    }//GEN-LAST:event_awCancelBtnActionPerformed
+
+    private void awIDCustomerTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_awIDCustomerTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_awIDCustomerTFActionPerformed
+
+    private void awIDAccountTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_awIDAccountTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_awIDAccountTFActionPerformed
+
+    private void awAddCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_awAddCustomerBtnActionPerformed
+        // TODO add your handling code here:
+        try {
+            int idCust = control.getNextIDCustomer();
+            int idAcc = control.getNextIDAccount();
+            int Balance = Integer.parseInt(awBalanceTF.getText());
+            String accType = awAccTypeComCBox.getSelectedItem().toString();
+            String name = awCNameTF.getText();
+            if(control.existCustomer(name)==false){
+                control.createNewCustomer(idCust, name, idAcc, Balance, accType);
+                awCNameTF.setText("");
+                awBalanceTF.setText("0");
+                awIDCustomerTF.setText("" +control.getNextIDCustomer());
+                awIDAccountTF.setText("" +control.getNextIDAccount());
+                JOptionPane.showMessageDialog(this, "Customer " +name +
+                " has been successfully created", "Notice",
+                JOptionPane.INFORMATION_MESSAGE);
+                for(int i = mwBankTable.getRowCount()-1; i >= 0; i--){
+                modelo.removeRow(i);
+                }
+                loadTableModel(control.getTable(name));
+                addNewCustomerWindow.setVisible(false);
+                customerActionWindow.setVisible(false);
+                awBalanceTF.setText("0");
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Customer " +name +
+                " already exist!", "Error", JOptionPane.WARNING_MESSAGE);
+                awIDCustomerTF.setText("" +control.getNextIDCustomer());
+                awIDAccountTF.setText("" +control.getNextIDAccount());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BankUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_awAddCustomerBtnActionPerformed
+
+    private void cawAddAccountBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cawAddAccountBtnActionPerformed
+        // TODO add your handling code here:
+        int checker;
+        checker=this.mwBankTable.getSelectedRowCount();
+            if(checker == 0){
+                JOptionPane.showMessageDialog(this, "There isn't a selected row!",
+                        "Error", JOptionPane.WARNING_MESSAGE);
+            }
+            else if(checker >= 2){
+                JOptionPane.showMessageDialog(this, "There is 2 or more, selected rows!",
+                        "Error", JOptionPane.WARNING_MESSAGE);
+            }
+        else {
+            //Hacer lo que sea que haga
+            addNewAccountWindow.setVisible(true);
+            addNewAccountWindow.setLocationRelativeTo(null);
+            aawBalanceTF.setText("0");
+        }
+    }//GEN-LAST:event_cawAddAccountBtnActionPerformed
+
+    private void mwSimilarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mwSimilarBtnActionPerformed
+        // TODO add your handling code here:
+        String nombre;
+        if(mwNameTF.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "This field can't be empty!",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            nombre=null;
+        }
+        else {
+            nombre = mwNameTF.getText();
+        }
+        String[][] table;
         
+        try {
+            //Usamos el String como parámetro de getTable 
+            table = control.getSimilarTable(nombre);
+                int tableTotalRow = mwBankTable.getRowCount();
+                //Una vez obtenido el nuevo table limpiamos el anterior
+                for(int i = tableTotalRow-1; i >= 0; i--){
+                    modelo.removeRow(i);
+                }
+            //Cargamos la tabla y limpiamos la caja de texto
+            //si encontro algun resultado
+            if(table!=null){
+                loadTableModel(table);
+                mwNameTF.setText("");
+            }
+            //Si el customer no existe, se crea una ventana indicandolo
+            else{
+                JOptionPane.showMessageDialog(this, "Any customer is similar to \"" +
+                        mwNameTF.getText() +"\"", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                        awCNameTF.setText(mwNameTF.getText());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BankUI.class.getName()).log(Level.WARNING, null, ex);
+        }
+    }//GEN-LAST:event_mwSimilarBtnActionPerformed
+
+    private void aawAccTypeComCBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aawAccTypeComCBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aawAccTypeComCBoxActionPerformed
+
+    private void aawCancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aawCancelBtnActionPerformed
+        // TODO add your handling code here:
+        addNewAccountWindow.setVisible(false);
+    }//GEN-LAST:event_aawCancelBtnActionPerformed
+
+    private void aawAddCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aawAddCustomerBtnActionPerformed
+        // TODO add your handling code here:
+        try {
+            int idCustomer = Integer.parseInt("" +mwBankTable.getValueAt(mwBankTable.getSelectedRow(), 0));
+            int idAccount = control.getNextIDAccount();
+            int balance = Integer.parseInt(aawBalanceTF.getText());
+            String accType = aawAccTypeComCBox.getSelectedItem().toString();
+            String fullName = mwBankTable.getValueAt(mwBankTable.getSelectedRow(), 1)+ " "+
+                    mwBankTable.getValueAt(mwBankTable.getSelectedRow(), 2);
+            boolean bandera= control.createNewAccount(idCustomer, fullName, idAccount, balance, accType);
+            if (bandera==true){
+                JOptionPane.showMessageDialog(this, "New account for \"" +
+                        mwBankTable.getValueAt(mwBankTable.getSelectedRow(), 1) +" "
+                        + mwBankTable.getValueAt(mwBankTable.getSelectedRow(), 2)+
+                        "\" has been succesfully created", "Notice",
+                        JOptionPane.INFORMATION_MESSAGE);
+                for(int i = mwBankTable.getRowCount()-1; i >= 0; i--){
+                modelo.removeRow(i);
+                }
+                loadTableModel(control.getTable(fullName));
+                addNewAccountWindow.setVisible(false);
+                customerActionWindow.setVisible(false);
+                aawBalanceTF.setText("0");
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Somthing went wrong :(", "Error",
+                        JOptionPane.WARNING_MESSAGE);
+                        awCNameTF.setText(mwNameTF.getText());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BankUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_aawAddCustomerBtnActionPerformed
+
+    private void aawBalanceTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aawBalanceTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aawBalanceTFActionPerformed
+
+    private void cawCancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cawCancelBtnActionPerformed
+        // TODO add your handling code here:
+        customerActionWindow.setVisible(false);
+    }//GEN-LAST:event_cawCancelBtnActionPerformed
+
+    //Este metodo carga el modelo la tabla
+    public void loadTableModel(String[][] datos){
+        mwBankTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        mwBankTable.doLayout();
+        
+        //Función que rellena los datos de la tabla con los datos obtenidos
+        String[] line = new String[datos[0].length];
+        for (String[] dato : datos) {
+            for (int column = 0; column<line.length; column++) {
+                line[column] = "" + dato[column];
+            }
+            modelo.addRow(line);
+        }
     }
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel MainWindow;
+    private javax.swing.JComboBox<String> aawAccTypeComCBox;
+    private javax.swing.JButton aawAddCustomerBtn;
+    private javax.swing.JTextField aawBalanceTF;
+    private javax.swing.JButton aawCancelBtn;
+    private javax.swing.JFrame addNewAccountWindow;
+    private javax.swing.JFrame addNewCustomerWindow;
+    private javax.swing.JComboBox<String> awAccTypeComCBox;
+    private javax.swing.JButton awAddCustomerBtn;
+    private javax.swing.JTextField awBalanceTF;
+    private javax.swing.JTextField awCNameTF;
+    private javax.swing.JButton awCancelBtn;
+    private javax.swing.JTextField awIDAccountTF;
+    private javax.swing.JTextField awIDCustomerTF;
+    private javax.swing.JButton cawAddAccountBtn;
+    private javax.swing.JButton cawCancelBtn;
+    private javax.swing.JButton cawDeleteCustomerBtn;
+    private javax.swing.JButton cawModifyBtn;
+    private javax.swing.JFrame customerActionWindow;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTable tablaBanco;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JFrame modifyCustomerWindow;
+    private javax.swing.JButton modwCancelBtn;
+    private javax.swing.JButton modwChangeBtn;
+    private javax.swing.JTextField modwCustomerNameTF;
+    private javax.swing.JButton mwAddNewCustomerBtn;
+    private javax.swing.JTable mwBankTable;
+    private javax.swing.JTextField mwNameTF;
+    private javax.swing.JButton mwSearchBtn;
+    private javax.swing.JButton mwSimilarBtn;
     // End of variables declaration//GEN-END:variables
 
     }

@@ -42,7 +42,7 @@ public class BankTextReader {
            line = array.get(i);
            split = line.split(",", 4);
            //Key es el FirstName + LastName
-           key = split[1] + " " + split[2];
+           key = split[1] + split[2];
            table.put(key, line);
        }
        return table;

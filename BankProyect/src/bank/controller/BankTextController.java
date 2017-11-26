@@ -49,6 +49,7 @@ public class BankTextController {
     //Recibe un hashTable y busca una key, si existe, regresa una tabla con
     //la informacion del resultado de la busqueda. Si no existe, regresa
     //un apuntador null
+    
     public String[][] getHashTable(String key)
     {
         int j;

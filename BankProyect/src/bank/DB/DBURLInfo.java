@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package bank.DB;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
+import java.util.Hashtable;
 
 
 /**
@@ -16,17 +16,18 @@ import java.util.Scanner;
  * @author Kirbey
  */
 public class DBURLInfo {
-    private String dbms;
-    private String serverName;
-    private String serverPort;
-    private String database;
-    private String fullInfo;
+    Hashtable data = new Hashtable();
+    String dbms;
+    String serverName;
+    String serverPort;
+    String database;
+    String fullInfo;
     
     
     //Función que recibe el nombre del archivo donde se almacena
     //la información del URL. Devuelve un string diseñado para la función
     //getConnection(String, Propperties) en DBConnection.
-    public String getURLInfo(String fileName){
+    public Hashtable getURLInfo(String fileName){
         try{
             Scanner scan = new Scanner(new FileReader(fileName));
             //Uso una coma como delimitador de tokens
@@ -54,34 +55,17 @@ public class DBURLInfo {
                     this.database = scan.next();
                 }
             }
-            //Asigno a fullinfo el String que devolvera la función
-            //en la forma que se necesita para getConection()
-            fullInfo =  "jdbc:" + this.dbms + "://" +
-                        this.serverName +
-                        ":" + this.serverPort + "/"
-                        + this.database;
             
-            //Cerramos el scan
+            this.data.put("dbms", this.dbms);
+            this.data.put("serverName", this.serverName);
+            this.data.put("serverPort", this.serverPort);
+            this.data.put("database", this.database);
             scan.close();
         }
-        catch(FileNotFoundException exc)
-           {
+        catch(FileNotFoundException exc){
            System.err.print(exc);
-           }
-        //Devolvemos fullinfo como
-        return fullInfo;
-    }
-    
-    //Función que recibe un parámtero String y devuelve un String
-    //correspondiente al dbms
-    public String getDbms(String fileName) throws FileNotFoundException{
-        Scanner scan = new Scanner(new FileReader(fileName));
-        scan.useDelimiter("\\s*,\\s*");
-        while (scan.hasNext()){
-                if("dbms".equals(scan.next())){
-                dbms= scan.next();
-                }
         }
-        return dbms;//<- Pendiente revisar esta parte
+        //Devolvemos fullinfo como
+        return data;
     }
 }
