@@ -76,11 +76,12 @@ public class DBURLInfo {
     //correspondiente al dbms
     public String getDbms(String fileName) throws FileNotFoundException{
         Scanner scan = new Scanner(new FileReader(fileName));
+        scan.useDelimiter("\\s*,\\s*");
         while (scan.hasNext()){
                 if("dbms".equals(scan.next())){
-                this.dbms= scan.next();
+                dbms= scan.next();
                 }
         }
-        return this.dbms;//<- Pendiente revisar esta parte
+        return dbms;//<- Pendiente revisar esta parte
     }
 }

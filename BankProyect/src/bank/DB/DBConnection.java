@@ -18,8 +18,7 @@ import java.util.Properties;
  */
 public class DBConnection {
     private Connection connection;
-    private Properties props;
-    private String dbms = "mysql";  //Al usar la función getDbms();
+    private Properties props; //Al usar la función getDbms();
                                     //obtenemos un valor null
     private DBURLInfo info = new DBURLInfo();
     private DBCredentials credInfo = new DBCredentials();
@@ -30,7 +29,7 @@ public class DBConnection {
         props.put("user", credInfo.user);
         props.put("password", credInfo.password);
         
-        if (this.dbms.equals("mysql")) {
+        if (info.getDbms("DBURLInfo.txt").equals("mysql")) {
             connection = DriverManager.getConnection(info.getURLInfo("DBURLInfo.txt"), props);
         }
         System.out.println("Connection established");
