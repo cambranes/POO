@@ -53,19 +53,4 @@ public class DBCredentials {
         
         return table;
     }
-    
-    
-    
-    
-    //Main para probarla antes de pasarla al DBConnection.
-    public static void main(String args[]){
-        try {
-            DBCredentials nuevo = new DBCredentials();
-                   System.out.print(nuevo.getCredentials("DBCredentials.txt") + "\n");
-        }
-        catch(FileNotFoundException ex){
-            System.err.print(ex);
-        }
-        
-    }
 }

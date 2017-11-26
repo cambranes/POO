@@ -35,22 +35,6 @@ public class DBQuery {
         }
         return resultset;
     }
-    
-    
-public static void main(String args[]){
-    try{    
-        ResultSet rs = new DBQuery().getCustomersAccountInfo("Maria", "Moreno");
-        String records = "";
-        while(rs.next()){
-        records +=  rs.getInt("idCustomer") + "\t" +
-                    rs.getString("FirstName") + "\t" +
-                    rs.getString("LastName");
-        }
-        System.out.println(records);
-    }
-    catch(SQLException ex){
-        System.out.println(ex.getMessage());
-    }
-}
+
     
 }

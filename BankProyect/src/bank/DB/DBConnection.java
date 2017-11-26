@@ -48,15 +48,4 @@ public class DBConnection {
         }
         return flag;
     }
-    public static void main(String args[]) throws FileNotFoundException{
-        try {
-            Connection connection = new DBConnection().getConnection();
-            connection.close();
-        }
-        catch(SQLException ex){
-            System.out.println(ex.getMessage());
-        }
-        DBURLInfo lol = new DBURLInfo();
-        System.out.print(lol.getDbms("DBURLInfo.txt"));
-    }
 }

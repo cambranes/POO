@@ -83,16 +83,4 @@ public class DBURLInfo {
         }
         return this.dbms;//<- Pendiente revisar esta parte
     }
-   public static void main(String args[]){
-        try {
-            DBURLInfo nuevo = new DBURLInfo();
-                    System.out.print("La información de la " +
-                            "conección es "+nuevo.getURLInfo("DBURLInfo.txt"));
-                    System.out.print("\nEl nombre del dbms es " +nuevo.getDbms("DBURLInfo.txt") +"\n");
-        }
-        catch(Exception ex){
-            System.err.print(ex);
-        }
-        
-    }
 }
