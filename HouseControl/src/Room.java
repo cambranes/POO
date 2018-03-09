@@ -22,17 +22,19 @@ public class Room {
         this.floor= floor;
     }
     
-    public Room(String floor){
+    public Room(String floor, String name){
         this.devices = new Device[MAXDEVICES];
         this.deviceCounter = 0;
+        this.name = name;
         this.floor= floor;
+        
     }
     
     public boolean addDevice(Device device){
         boolean flag = false;
-        if(deviceCounter < MAXDEVICES){
-            devices[deviceCounter]=device;
-            deviceCounter++;
+        if(getDeviceCounter() < MAXDEVICES){
+            devices[getDeviceCounter()]=device;
+            setDeviceCounter(getDeviceCounter() + 1);
             flag = true;
         }
        return flag;
@@ -81,20 +83,35 @@ public class Room {
     }
 
     public String toString(){
-        String output = null;
+        String output = "";
         output=output+name +"\n"+floor+"\n";
-        for(int i=0;i<this.devices.length;i++){
+        for(int i=0;i<this.deviceCounter;i++){
             output = output+devices[i].toString()+"\n";
         }
         return output;
     }
+/**
+     * @return the deviceCounter
+     */
+    public int getDeviceCounter() {
+        return deviceCounter;
+    }
+
+    /**
+     * @param deviceCounter the deviceCounter to set
+     */
+    public void setDeviceCounter(int deviceCounter) {
+        this.deviceCounter = deviceCounter;
+    }
+
     
     public int searchDevice(Device otherDevice){
         int index = 0;
         boolean  flag = false;
-        for(index=0; index<deviceCounter && flag == false; index++){
+        for(index=0; index<getDeviceCounter() && flag == false; index++){
             if(devices[index].equals(otherDevice)){
                 flag = true;
+                break;
             }
         }
         if(flag == false){
@@ -107,15 +124,20 @@ public class Room {
         boolean flag = false;
         int pos = searchDevice(device);
         
-        if(pos!= -1){
-            for(int  i=pos; i<deviceCounter-1; i++){
-                devices[i] =devices[i+1];
+        if(pos!=-1){
+            if(pos==0 && getDeviceCounter()==1){
+                devices[pos]=null;
             }
-            deviceCounter--;
+            else{
+                for(int i=pos; i<getDeviceCounter()-1; i++){
+                devices[i]=devices[i+1];
+                }
+            }
+            setDeviceCounter(getDeviceCounter() - 1);
         }
-        
         return flag;
     }
 
+    
 }
 
