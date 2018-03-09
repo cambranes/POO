@@ -12,4 +12,6 @@ public class Level {
     private Room rooms[];
     private String name;
     
+    
+    
 }

@@ -10,6 +10,7 @@
  */
 public class House {
     private Level levels[];
+    private String name;
     
     
 }

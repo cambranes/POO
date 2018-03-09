@@ -137,6 +137,18 @@ public class Room {
         }
         return flag;
     }
+    
+    public void switchOffAllDevices(){
+        for(int index=0; index<getDeviceCounter(); index++){
+            devices[index].switchOffDevice();
+        }
+    }
+    
+    public void switchOnAllDevices(){
+        for(int index=0; index<getDeviceCounter(); index++){
+            devices[index].switchOnDevice();
+        }
+    }
 
     
 }

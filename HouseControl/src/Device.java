@@ -96,4 +96,19 @@ public class Device {
         return flag;
     }
     
+    public boolean toggleDevice(){
+        this.status = !(this.status); 
+        return status;
+    }
+    
+    public boolean switchOffDevice(){
+        status = false;
+        return status;
+    }
+    
+    public boolean switchOnDevice(){
+        status = true;
+        return status;
+    }
+    
 }
