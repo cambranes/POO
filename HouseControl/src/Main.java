@@ -13,7 +13,9 @@ public class Main {
     public static void main(String[] ar){
         Device[] devices= new Device[20];
         
-        Room room = new Room("Ground Floor", "Living Room");
+        Room room = new Room("Ground Floor");
+        
+        
         
         room.addDevice(new Device("Reynaldo", "LG", "123456", true));
         room.addDevice(new Device("Andrea", "Nokia", "Lumia-520", true));

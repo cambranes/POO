@@ -13,20 +13,17 @@ public class Room {
     private int deviceCounter;
     private Device devices[];
     private String name;
-    private String floor;
     
     
-    public Room(Device devices[], int deviceCounter, String floor){
+    public Room(Device devices[], int deviceCounter){
         this.deviceCounter = deviceCounter;
         this.devices = devices;
-        this.floor= floor;
-    }
+        }
     
-    public Room(String floor, String name){
+    public Room(String name){
         this.devices = new Device[MAXDEVICES];
         this.deviceCounter = 0;
         this.name = name;
-        this.floor= floor;
         
     }
     
@@ -55,20 +52,6 @@ public class Room {
     }
 
     /**
-     * @return the floor
-     */
-    public String getFloor() {
-        return floor;
-    }
-
-    /**
-     * @param floor the floor to set
-     */
-    public void setFloor(String floor) {
-        this.floor = floor;
-    }
-
-    /**
      * @return the name
      */
     public String getName() {
@@ -84,7 +67,7 @@ public class Room {
 
     public String toString(){
         String output = "";
-        output=output+name +"\n"+floor+"\n";
+        output=output+name +"\n";
         for(int i=0;i<this.deviceCounter;i++){
             output = output+devices[i].toString()+"\n";
         }
@@ -148,6 +131,18 @@ public class Room {
         for(int index=0; index<getDeviceCounter(); index++){
             devices[index].switchOnDevice();
         }
+    }
+    
+    //Equals Room
+    public boolean equals(Object obj){
+        boolean flag = false;
+        if(obj instanceof Room && obj!= null){
+            Room otherRoom =(Room)obj;
+            if(this.name == otherRoom.name){
+                    flag = true;
+                    }
+            }
+            return flag;
     }
 
     
