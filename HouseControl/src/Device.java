@@ -80,7 +80,7 @@ public class Device {
     }
     
     public String toString(){
-        return name+" "+brand+" "+model;
+        return name+" "+brand+" "+model +" " +status;
     }
     
     public boolean equals(Object obj){

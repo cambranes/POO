@@ -16,7 +16,7 @@ public class Level {
     
 //Contructor dos parametros
 public Level(Room rooms[], String name){
-        this.roomCounter = rooms.length;
+        this.roomCounter = getCounterRooms(rooms);
         this.rooms = rooms;
         this.name = name;
     }
@@ -27,6 +27,19 @@ public Level(String name){
         this.roomCounter = 0;
         this.rooms = new Room[MAXROOMS];
     }
+
+public int getCounterRooms(Room rooms[]){
+    int roomCounter = 0;
+    for(int i = 0;i < rooms.length; i++){
+        if(rooms[i] != null){
+            roomCounter++;
+        }
+        else{
+            break;
+        }
+    }
+    return roomCounter;
+}
 
 public boolean addRoom(Room room){
     boolean flag = false;
@@ -138,6 +151,20 @@ public boolean addRoom(Room room){
             output = output+rooms[i].toString()+"\n";
         }
         return output;
+    }
+    
+    public boolean switchAllOffRooms(){
+        for(int index=0; index<getRoomCounter(); index++){
+            rooms[index].switchOffAllDevices();
+        }
+        return true;
+    }
+    
+    public boolean switchAllOnRooms(){
+        for(int index=0; index<getRoomCounter(); index++){
+            rooms[index].switchOnAllDevices();
+        }
+        return true;
     }
 
 }
