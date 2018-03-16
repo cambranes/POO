@@ -166,5 +166,68 @@ public boolean addRoom(Room room){
         }
         return true;
     }
+    
+    public boolean switchOnRoom(Room room){
+        boolean flag=false;
+        int index;
+        index=this.searchRoom(room);
+        if(index>-1){
+            rooms[index].switchOnAllDevices();
+            flag=true;
+        }
+        return flag;
+    }
 
+    public boolean switchOffRoom(Room room){
+        boolean flag=false;
+        int index;
+        index=this.searchRoom(room);
+        if(index>-1){
+            rooms[index].switchOffAllDevices();
+            flag=true;
+        }
+        return flag;
+    }
+    public boolean levelSwitchOffDevice(Room room, Device device){
+       boolean found = false;
+       int lRoom = this.searchRoom(room);
+       if(lRoom > -1){
+           Device d[];
+            d = rooms[lRoom].getDevices();
+            int lDevice = rooms[lRoom].searchDevice(device);
+            
+            if(lDevice > -1)
+                d[lDevice].switchOffDevice();
+            else
+                found = true;
+       }
+       return found;
+    }
+    
+    public boolean levelSwitchOnDevice(Room room, Device device){
+       boolean found = false;
+       int lRoom = this.searchRoom(room);
+       if(lRoom > -1){
+           Device d[];
+            d = rooms[lRoom].getDevices();
+            int lDevice = rooms[lRoom].searchDevice(device);
+            
+            if(lDevice > -1)
+                d[lDevice].switchOnDevice();
+            else
+                found = true;
+       }
+       return found;
+    }
+    
+    public void switchAllOffSameDevices(String nameDevices){//Nuevo
+      for(int i=0; i<roomCounter; i++){
+          Device []devices = rooms[i].getDevices();
+          for(int j=0; j<rooms[i].getDeviceCounter(); j++){
+              if(devices[j].getName().equals(nameDevices)){
+                  devices[j].switchOffDevice();
+              }
+          }
+      }          
+  }
 }

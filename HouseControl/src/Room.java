@@ -13,6 +13,7 @@ public class Room {
     private int deviceCounter;
     private Device devices[];
     private String name;
+    private String type;
     
     
     public Room(Device devices[], int deviceCounter){
