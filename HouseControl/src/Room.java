@@ -13,26 +13,25 @@ public class Room {
     private int deviceCounter;
     private Device devices[];
     private String name;
-    private String floor;
     
     
-    public Room(Device devices[], int deviceCounter, String floor){
+    public Room(Device devices[], int deviceCounter){
         this.deviceCounter = deviceCounter;
         this.devices = devices;
-        this.floor= floor;
-    }
+        }
     
-    public Room(String floor){
+    public Room(String name){
         this.devices = new Device[MAXDEVICES];
         this.deviceCounter = 0;
-        this.floor= floor;
+        this.name = name;
+        
     }
     
     public boolean addDevice(Device device){
         boolean flag = false;
-        if(deviceCounter < MAXDEVICES){
-            devices[deviceCounter]=device;
-            deviceCounter++;
+        if(getDeviceCounter() < MAXDEVICES){
+            devices[getDeviceCounter()]=device;
+            setDeviceCounter(getDeviceCounter() + 1);
             flag = true;
         }
        return flag;
@@ -53,20 +52,6 @@ public class Room {
     }
 
     /**
-     * @return the floor
-     */
-    public String getFloor() {
-        return floor;
-    }
-
-    /**
-     * @param floor the floor to set
-     */
-    public void setFloor(String floor) {
-        this.floor = floor;
-    }
-
-    /**
      * @return the name
      */
     public String getName() {
@@ -81,20 +66,35 @@ public class Room {
     }
 
     public String toString(){
-        String output = null;
-        output=output+name +"\n"+floor+"\n";
-        for(int i=0;i<this.devices.length;i++){
+        String output = "";
+        output=output+name +"\n";
+        for(int i=0;i<this.deviceCounter;i++){
             output = output+devices[i].toString()+"\n";
         }
         return output;
     }
+/**
+     * @return the deviceCounter
+     */
+    public int getDeviceCounter() {
+        return deviceCounter;
+    }
+
+    /**
+     * @param deviceCounter the deviceCounter to set
+     */
+    public void setDeviceCounter(int deviceCounter) {
+        this.deviceCounter = deviceCounter;
+    }
+
     
     public int searchDevice(Device otherDevice){
         int index = 0;
         boolean  flag = false;
-        for(index=0; index<deviceCounter && flag == false; index++){
+        for(index=0; index<getDeviceCounter() && flag == false; index++){
             if(devices[index].equals(otherDevice)){
                 flag = true;
+                break;
             }
         }
         if(flag == false){
@@ -107,15 +107,44 @@ public class Room {
         boolean flag = false;
         int pos = searchDevice(device);
         
-        if(pos!= -1){
-            for(int  i=pos; i<deviceCounter-1; i++){
-                devices[i] =devices[i+1];
+        if(pos!=-1){
+            if(pos==0 && getDeviceCounter()==1){
+                devices[pos]=null;
             }
-            deviceCounter--;
+            else{
+                for(int i=pos; i<getDeviceCounter()-1; i++){
+                devices[i]=devices[i+1];
+                }
+            }
+            setDeviceCounter(getDeviceCounter() - 1);
         }
-        
         return flag;
     }
+    
+    public void switchOffAllDevices(){
+        for(int index=0; index<getDeviceCounter(); index++){
+            devices[index].switchOffDevice();
+        }
+    }
+    
+    public void switchOnAllDevices(){
+        for(int index=0; index<getDeviceCounter(); index++){
+            devices[index].switchOnDevice();
+        }
+    }
+    
+    //Equals Room
+    public boolean equals(Object obj){
+        boolean flag = false;
+        if(obj instanceof Room && obj!= null){
+            Room otherRoom =(Room)obj;
+            if(this.name == otherRoom.name){
+                    flag = true;
+                    }
+            }
+            return flag;
+    }
 
+    
 }
 

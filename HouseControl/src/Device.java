@@ -80,7 +80,7 @@ public class Device {
     }
     
     public String toString(){
-        return name+" "+brand+" "+model;
+        return name+" "+brand+" "+model +" " +status;
     }
     
     public boolean equals(Object obj){
@@ -94,6 +94,21 @@ public class Device {
             }
         }
         return flag;
+    }
+    
+    public boolean toggleDevice(){
+        this.status = !(this.status); 
+        return status;
+    }
+    
+    public boolean switchOffDevice(){
+        status = false;
+        return status;
+    }
+    
+    public boolean switchOnDevice(){
+        status = true;
+        return status;
     }
     
 }
