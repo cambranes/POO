@@ -27,7 +27,6 @@ public class Main {
         roomsFirst[1] = new Room("Bedroom2");
         roomsFirst[2] = new Room("Bathroom");
         
-        
         //Living
         roomsGround[0].addDevice(new Device("Aire acondicionado", "LG", "pm07sp", true));
         roomsGround[0].addDevice(new Device("Luces", "Philips", "Hue", true));
@@ -50,16 +49,24 @@ public class Main {
         roomsFirst[2].addDevice(new Device("Luces","Alefco","lw100",true));
 
         Level ground = new Level(roomsGround,"Ground Floor");
-        Level floor1 = new Level(roomsFirst,"First Floor");
+        Level first = new Level(roomsFirst,"First Floor");
+        
+        Level levels[] = new Level[5];
+        levels[0] = ground;
+        levels[1] = first;
+        
+        House house = new House(levels, "MyHome");
+        
+        
         
         System.out.println(ground);
-        System.out.println(floor1);
+        System.out.println(first);
         
         ground.switchAllOffRooms();
-        floor1.switchAllOffRooms();
+        first.switchAllOffRooms();
         
         System.out.println(ground);
-        System.out.println(floor1);
+        System.out.println(first);
         
         /*
         room.addDevice(new Device("Reynaldo", "LG", "123456", true));

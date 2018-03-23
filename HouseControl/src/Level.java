@@ -230,4 +230,16 @@ public boolean addRoom(Room room){
           }
       }          
   }
+  
+    public boolean equals(Object obj){
+        boolean flag = false;
+        if(obj instanceof Level && obj!= null){
+            Level otherDevice =(Level)obj;
+            if(this.name == otherDevice.name){
+                flag = true;
+            }
+        }
+        return flag;
+    }
+    
 }
