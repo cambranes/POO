@@ -58,4 +58,64 @@ public class House {
             return index;
         }
     
+public int countDevicesOn(){
+    int devicesOn=0;
+    for(int i=0;i<levelCounter; i++){
+        Room rooms[] = levels[i].getRooms();
+        int counterRooms= levels[i].getCounterRooms(rooms);
+        for(int j=0;j<counterRooms; j++){
+            Device devices[] = rooms[j].getDevices();
+            int counterDevices = rooms[j].getDeviceCounter();
+            for(int k=0;k<counterDevices; k++){
+                if(devices[k].isStatus() == true){
+                devicesOn++;
+                }
+            }
+        }
+    }
+    return devicesOn;
 }
+
+public int countSpecificDevice(String name){
+    int counter=0;
+    for(int i=0;i<levelCounter; i++){
+        Room rooms[] = levels[i].getRooms();
+        int counterRooms= levels[i].getCounterRooms(rooms);
+        for(int j=0;j<counterRooms; j++){
+            Device devices[] = rooms[j].getDevices();
+            int counterDevices = rooms[j].getDeviceCounter();
+            for(int k=0;k<counterDevices; k++){
+                if(devices[k].getName().equals(name)){
+                counter++;
+                }
+            }
+        }
+    }
+    return counter;
+}
+
+public boolean toogleSpecificDeviceLevel(String level,String device){
+    boolean flag = false;
+    for(int i=0;i<levelCounter; i++){
+        if(levels[i].getName().equals(level)){
+        Room rooms[] = levels[i].getRooms();
+        int counterRooms= levels[i].getCounterRooms(rooms);
+        for(int j=0;j<counterRooms; j++){
+            Device devices[] = rooms[j].getDevices();
+            int counterDevices = rooms[j].getDeviceCounter();
+            for(int k=0;k<counterDevices; k++){
+                if(devices[k].getName().equals(name)){
+                devices[k].toggleDevice();
+                flag = true;
+                }
+            }
+          }
+        }
+    }
+    return flag;
+}
+
+
+    
+}
+
