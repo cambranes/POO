@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,39 +12,39 @@
  * @author edgar.cambranes
  */
 public class Room {
-    private final int MAXDEVICES = 20;
+    /*private final int MAXDEVICES = 20;
     private int deviceCounter;
-    private Device devices[];
+    private Device devices[];*/
+    private ArrayList<Device> devices;
     private String name;
-    private String type;
     
     
-    public Room(Device devices[], int deviceCounter){
-        this.deviceCounter = deviceCounter;
+    
+    public Room(ArrayList<Device> devices){
         this.devices = devices;
         }
     
     public Room(String name){
-        this.devices = new Device[MAXDEVICES];
-        this.deviceCounter = 0;
+        this.devices = new ArrayList<Device>();
         this.name = name;
         
     }
     
-    public boolean addDevice(Device device){
-        boolean flag = false;
+    public void addDevice(Device device){
+        /*boolean flag = false;
         if(getDeviceCounter() < MAXDEVICES){
             devices[getDeviceCounter()]=device;
             setDeviceCounter(getDeviceCounter() + 1);
             flag = true;
         }
-       return flag;
+       return flag;*/
+        devices.add(device);
     }
 
     /**
      * @return the devices
      */
-    public Device[] getDevices() {
+    public ArrayList<Device> getDevices() {
         return devices;
     }
 
@@ -69,8 +72,8 @@ public class Room {
     public String toString(){
         String output = "";
         output=output+name +"\n";
-        for(int i=0;i<this.deviceCounter;i++){
-            output = output+devices[i].toString()+"\n";
+        for(int i=0;i<this.devices.size();i++){
+            output = output+devices.get(i).toString()+"\n";
         }
         return output;
     }
@@ -78,22 +81,16 @@ public class Room {
      * @return the deviceCounter
      */
     public int getDeviceCounter() {
-        return deviceCounter;
+        return devices.size();
     }
 
-    /**
-     * @param deviceCounter the deviceCounter to set
-     */
-    public void setDeviceCounter(int deviceCounter) {
-        this.deviceCounter = deviceCounter;
-    }
 
     
     public int searchDevice(Device otherDevice){
         int index = 0;
         boolean  flag = false;
         for(index=0; index<getDeviceCounter() && flag == false; index++){
-            if(devices[index].equals(otherDevice)){
+            if(devices.get(index).equals(otherDevice)){
                 flag = true;
                 break;
             }
@@ -106,31 +103,25 @@ public class Room {
     
     public boolean  removeDevice(Device device){
         boolean flag = false;
-        int pos = searchDevice(device);
+        int pos =  searchDevice(device);
         
         if(pos!=-1){
-            if(pos==0 && getDeviceCounter()==1){
-                devices[pos]=null;
-            }
-            else{
-                for(int i=pos; i<getDeviceCounter()-1; i++){
-                devices[i]=devices[i+1];
-                }
-            }
-            setDeviceCounter(getDeviceCounter() - 1);
+            devices.remove(pos);
         }
+        
         return flag;
+        
     }
     
     public void switchOffAllDevices(){
         for(int index=0; index<getDeviceCounter(); index++){
-            devices[index].switchOffDevice();
+            devices.get(index).switchOffDevice();
         }
     }
     
     public void switchOnAllDevices(){
         for(int index=0; index<getDeviceCounter(); index++){
-            devices[index].switchOnDevice();
+            devices.get(index).switchOnDevice();
         }
     }
     
