@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,14 +12,14 @@
  * @author edgar.cambranes
  */
 public class Level {
-    private int MAXROOMS = 5;
+    /*private int MAXROOMS = 5;
     private int roomCounter;
-    private Room rooms[];
+    private Room rooms[];*/
+    private ArrayList<Room> rooms;
     private String name;
     
 //Contructor dos parametros
-public Level(Room rooms[], String name){
-        this.roomCounter = getCounterRooms(rooms);
+public Level(ArrayList<Room> rooms, String name){
         this.rooms = rooms;
         this.name = name;
     }
@@ -24,12 +27,11 @@ public Level(Room rooms[], String name){
 //Constructor un parámetro
 public Level(String name){
         this.name = name;
-        this.roomCounter = 0;
-        this.rooms = new Room[MAXROOMS];
+        this.rooms =  new ArrayList<Room>();
     }
 
-public int getCounterRooms(Room rooms[]){
-    int roomCounter = 0;
+public int getCounterRooms(ArrayList<Room> rooms){
+    /*int roomCounter = 0;
     for(int i = 0;i < rooms.length; i++){
         if(rooms[i] != null){
             roomCounter++;
@@ -37,59 +39,41 @@ public int getCounterRooms(Room rooms[]){
         else{
             break;
         }
-    }
-    return roomCounter;
+    }*/
+    return rooms.size();
 }
 
-public boolean addRoom(Room room){
-    boolean flag = false;
+public void addRoom(Room room){
+    /*boolean flag = false;
     if(roomCounter<MAXROOMS){
         rooms[roomCounter] = room;
         roomCounter++;
         flag = true;
     }
-    return flag;
+    return flag;*/
+    rooms.add(room);
 }
 
-    /**
-     * @return the MAXROOMS
-     */
-    public int getMAXROOMS() {
-        return MAXROOMS;
-    }
-
-    /**
-     * @param MAXROOMS the MAXROOMS to set
-     */
-    public void setMAXROOMS(int MAXROOMS) {
-        this.MAXROOMS = MAXROOMS;
-    }
-
+   
     /**
      * @return the roomCounter
      */
     public int getRoomCounter() {
-        return roomCounter;
+        return rooms.size();
     }
 
-    /**
-     * @param roomCounter the roomCounter to set
-     */
-    public void setRoomCounter(int roomCounter) {
-        this.roomCounter = roomCounter;
-    }
 
     /**
      * @return the rooms
      */
-    public Room[] getRooms() {
+    public ArrayList<Room> getRooms() {
         return rooms;
     }
 
     /**
      * @param rooms the rooms to set
      */
-    public void setRooms(Room[] rooms) {
+    public void setRooms(ArrayList<Room> rooms) {
         this.rooms = rooms;
     }
 
@@ -111,8 +95,8 @@ public boolean addRoom(Room room){
     public int searchRoom(Room otherRoom){
             int index = 0;
             boolean  flag = false;
-            for(index=0; index<roomCounter && flag == false; index++){
-                if(rooms[index].equals(otherRoom)){
+            for(index=0; index<rooms.size() && flag == false; index++){
+                if(rooms.get(index).equals(otherRoom)){
                     flag = true;
                     break;
                 }
@@ -129,16 +113,7 @@ public boolean addRoom(Room room){
             int pos= searchRoom(room);
 
             if(pos != -1){
-                    if(pos == 0 && roomCounter == 1)
-                            rooms[pos]=null;
-
-            else
-                    for(int i= pos; i<roomCounter-1; i++)
-                            rooms[i]= rooms[i+1];
-
-            flag= true;
-            roomCounter= roomCounter-1;
-
+                   rooms.remove(pos);
             }
 
             return flag;
@@ -147,22 +122,22 @@ public boolean addRoom(Room room){
     public String toString(){
         String output = "";
         output=output+name +"\n";
-        for(int i=0;i<this.roomCounter;i++){
-            output = output+rooms[i].toString()+"\n";
+        for(int i=0;i<rooms.size();i++){
+            output = output+rooms.get(i).toString()+"\n";
         }
         return output;
     }
     
     public boolean switchAllOffRooms(){
         for(int index=0; index<getRoomCounter(); index++){
-            rooms[index].switchOffAllDevices();
+            rooms.get(index).switchOffAllDevices();
         }
         return true;
     }
     
     public boolean switchAllOnRooms(){
         for(int index=0; index<getRoomCounter(); index++){
-            rooms[index].switchOnAllDevices();
+            rooms.get(index).switchOnAllDevices();
         }
         return true;
     }
@@ -172,7 +147,7 @@ public boolean addRoom(Room room){
         int index;
         index=this.searchRoom(room);
         if(index>-1){
-            rooms[index].switchOnAllDevices();
+            rooms.get(index).switchOnAllDevices();
             flag=true;
         }
         return flag;
@@ -183,7 +158,7 @@ public boolean addRoom(Room room){
         int index;
         index=this.searchRoom(room);
         if(index>-1){
-            rooms[index].switchOffAllDevices();
+            rooms.get(index).switchOffAllDevices();
             flag=true;
         }
         return flag;
@@ -192,12 +167,12 @@ public boolean addRoom(Room room){
        boolean found = false;
        int lRoom = this.searchRoom(room);
        if(lRoom > -1){
-           Device d[];
-            d = rooms[lRoom].getDevices();
-            int lDevice = rooms[lRoom].searchDevice(device);
+           ArrayList<Device> d;
+            d = rooms.get(lRoom).getDevices();
+            int lDevice = rooms.get(lRoom).searchDevice(device);
             
             if(lDevice > -1)
-                d[lDevice].switchOffDevice();
+                d.get(lDevice).switchOffDevice();
             else
                 found = true;
        }
@@ -208,12 +183,12 @@ public boolean addRoom(Room room){
        boolean found = false;
        int lRoom = this.searchRoom(room);
        if(lRoom > -1){
-           Device d[];
-            d = rooms[lRoom].getDevices();
-            int lDevice = rooms[lRoom].searchDevice(device);
+            ArrayList<Device> d;
+            d = rooms.get(lRoom).getDevices();
+            int lDevice = rooms.get(lRoom).searchDevice(device);
             
             if(lDevice > -1)
-                d[lDevice].switchOnDevice();
+                d.get(lDevice).switchOnDevice();
             else
                 found = true;
        }
@@ -221,11 +196,11 @@ public boolean addRoom(Room room){
     }
     
     public void switchAllOffSameDevices(String nameDevices){//Nuevo
-      for(int i=0; i<roomCounter; i++){
-          Device []devices = rooms[i].getDevices();
-          for(int j=0; j<rooms[i].getDeviceCounter(); j++){
-              if(devices[j].getName().equals(nameDevices)){
-                  devices[j].switchOffDevice();
+      for(int i=0; i<rooms.size(); i++){
+          ArrayList<Device> devices = rooms.get(i).getDevices();
+          for(int j=0; j<rooms.get(i).getDeviceCounter(); j++){
+              if(devices.get(j).getName().equals(nameDevices)){
+                  devices.get(j).switchOffDevice();
               }
           }
       }          

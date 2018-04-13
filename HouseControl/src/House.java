@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,45 +12,50 @@
  * @author edgar.cambranes
  */
 public class House {
-    private final int MAXLEVELS = 5;
+    /*private final int MAXLEVELS = 5;
     private int levelCounter;
-    private Level levels[];
+    private Level levels[];*/
+    private ArrayList<Level> levels;
     private String name;
     
     
-    public House (Level[] levels, String name){
+    public House (ArrayList<Level> levels, String name){
         this.levels = levels;
         this.name = name;
-        this.levelCounter = getLevelCounter(levels);
+       
     }
     
     public House ( String name){
-        this.levels = new Level[MAXLEVELS];
+        this.levels = new ArrayList<Level>();
         this.name = name;
-        this.levelCounter = 0;
+        
         
     }
     
+    public void addLevel (Level level){
+        levels.add(level);
+    }
     
-    public int getLevelCounter(Level[] levels){
-        int levelCounter = 0;
-        for(int i = 0;i < levels.length; i++){
-            if(levels[i] != null){
+    
+    public int getLevelCounter(ArrayList<Level> levels){
+        /*int levelCounter = 0;
+        for(int i = 0;i < levels.size(); i++){
+            if(levels[ != null){
                 levelCounter++;
             }
             else{
                 break;
             }
-        }
-        return levelCounter;
+        }*/
+        return levels.size();
     
     }
     
     public int searchLevel(String name){
             int index = 0;
             boolean  flag = false;
-            for(index=0; index<levelCounter && flag == false; index++){
-                if(levels[index].equals(new Level(name))){
+            for(index=0; index<levels.size() && flag == false; index++){
+                if(levels.get(index).equals(new Level(name))){
                     flag = true;
                     break;
                 }
@@ -60,14 +68,14 @@ public class House {
     
 public int countDevicesOn(){
     int devicesOn=0;
-    for(int i=0;i<levelCounter; i++){
-        Room rooms[] = levels[i].getRooms();
-        int counterRooms= levels[i].getCounterRooms(rooms);
+    for(int i=0;i<levels.size(); i++){
+        ArrayList<Room>rooms = levels.get(i).getRooms();
+        int counterRooms= levels.get(i).getCounterRooms(rooms);
         for(int j=0;j<counterRooms; j++){
-            Device devices[] = rooms[j].getDevices();
-            int counterDevices = rooms[j].getDeviceCounter();
+            ArrayList<Device> devices = rooms.get(j).getDevices();
+            int counterDevices = rooms.get(j).getDeviceCounter();
             for(int k=0;k<counterDevices; k++){
-                if(devices[k].isStatus() == true){
+                if(devices.get(k).isStatus() == true){
                 devicesOn++;
                 }
             }
@@ -78,14 +86,14 @@ public int countDevicesOn(){
 
 public int countSpecificDevice(String name){
     int counter=0;
-    for(int i=0;i<levelCounter; i++){
-        Room rooms[] = levels[i].getRooms();
-        int counterRooms= levels[i].getCounterRooms(rooms);
+    for(int i=0;i<levels.size(); i++){
+        ArrayList<Room>rooms = levels.get(i).getRooms();
+        int counterRooms= levels.get(i).getCounterRooms(rooms);
         for(int j=0;j<counterRooms; j++){
-            Device devices[] = rooms[j].getDevices();
-            int counterDevices = rooms[j].getDeviceCounter();
+            ArrayList<Device> devices = rooms.get(j).getDevices();
+            int counterDevices = rooms.get(j).getDeviceCounter();
             for(int k=0;k<counterDevices; k++){
-                if(devices[k].getName().equals(name)){
+                if(devices.get(k).getName().equals(name)){
                 counter++;
                 }
             }
@@ -96,16 +104,16 @@ public int countSpecificDevice(String name){
 
 public boolean toogleSpecificDeviceLevel(String level,String device){
     boolean flag = false;
-    for(int i=0;i<levelCounter; i++){
-        if(levels[i].getName().equals(level)){
-        Room rooms[] = levels[i].getRooms();
-        int counterRooms= levels[i].getCounterRooms(rooms);
+    for(int i=0;i<levels.size(); i++){
+        if(levels.get(i).getName().equals(level)){
+        ArrayList<Room>rooms = levels.get(i).getRooms();
+        int counterRooms= levels.get(i).getCounterRooms(rooms);
         for(int j=0;j<counterRooms; j++){
-            Device devices[] = rooms[j].getDevices();
-            int counterDevices = rooms[j].getDeviceCounter();
+            ArrayList<Device> devices = rooms.get(j).getDevices();
+            int counterDevices = rooms.get(j).getDeviceCounter();
             for(int k=0;k<counterDevices; k++){
-                if(devices[k].getName().equals(name)){
-                devices[k].toggleDevice();
+                if(devices.get(k).getName().equals(name)){
+                devices.get(k).toggleDevice();
                 flag = true;
                 }
             }
@@ -115,7 +123,14 @@ public boolean toogleSpecificDeviceLevel(String level,String device){
     return flag;
 }
 
-
+public String toString(){
+        String output = "";
+        output=output+name +"\n";
+        for(int i=0;i<levels.size();i++){
+            output = output+levels.get(i).toString()+"\n";
+        }
+        return output;
+    }
     
 }
 

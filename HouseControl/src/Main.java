@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,60 +16,64 @@ public class Main {
     public static void main(String[] ar){
         
         
-        Device[] devices= new Device[20];
         
-        Room [] roomsGround = new Room[5];
+        /*Room [] roomsGround = new Room[5];
         Room [] roomsFirst = new Room[5];
+        */
+        Room living  = new Room("Living");
+        Room kitchen = new Room("Kitchen");
+        Room bathroom = new Room("Bathroom");
+        Room garage = new Room("Garage");
         
-        roomsGround[0]= new Room("Living");
-        roomsGround[1]=new Room("Kitchen");
-        roomsGround[2]=new Room("Bathroom");
-        roomsGround[3]=new Room("Garage");
+        Room bedroom1 = new Room("Bedroom1");
+        Room bedroom2 = new Room("Bedroom2");
+        Room bathroom1stf=new Room("Bathroom");
         
-        roomsFirst[0] = new Room("Bedroom1");
-        roomsFirst[1] = new Room("Bedroom2");
-        roomsFirst[2] = new Room("Bathroom");
         
         //Living
-        roomsGround[0].addDevice(new Device("Aire acondicionado", "LG", "pm07sp", true));
-        roomsGround[0].addDevice(new Device("Luces", "Philips", "Hue", true));
+        living.addDevice(new Device("Aire acondicionado", "LG", "pm07sp", true));
+        living.addDevice(new Device("Luces", "Philips", "Hue", true));
         //Kitchen
-        roomsGround[1].addDevice(new Device("luces","Ahorradoras","34234", true));
+        kitchen.addDevice(new Device("luces","Ahorradoras","34234", true));
         //Bathroom
-        roomsGround[2].addDevice(new Device("luce","simple","354676", true));
+        bathroom.addDevice(new Device("luce","simple","354676", true));
         //Garage
-        roomsGround[3].addDevice(new Device("lightbulb","the best","X3000",true));
+        garage.addDevice(new Device("lightbulb","the best","X3000",true));
         
         //Bedroom 1
-        roomsFirst[0].addDevice(new Device("Aire acondicionado", "Mabe" , "Mmt12cdbs3", true));
-        roomsFirst[0].addDevice(new Device("Luces","Philips","EcoVantage",true));
+        bedroom1.addDevice(new Device("Aire acondicionado", "Mabe" , "Mmt12cdbs3", true));
+        bedroom1.addDevice(new Device("Luces","Philips","EcoVantage",true));
         
         //Bedroom 2
-        roomsFirst[1].addDevice(new Device("Aire acondicionado", "Hisense" , "AS-12CR5FVETD/1TR", true));
-        roomsFirst[1].addDevice(new Device("Luces","Ho Iluminacion","A19 60W Claro",true));
+        bedroom2.addDevice(new Device("Aire acondicionado", "Hisense" , "AS-12CR5FVETD/1TR", true));
+        bedroom2.addDevice(new Device("Luces","Ho Iluminacion","A19 60W Claro",true));
         
         //baño primer piso
-        roomsFirst[2].addDevice(new Device("Luces","Alefco","lw100",true));
+        bathroom1stf.addDevice(new Device("Luces","Alefco","lw100",true));
+        
+        
+        
+        Level groundFloor = new Level("Ground Floor");
+        Level firstFloor = new Level("First Floor");
+        
+        
+        groundFloor.addRoom(living);
+        groundFloor.addRoom(kitchen);
+        groundFloor.addRoom(bathroom);
+        groundFloor.addRoom(garage);
+        
+        firstFloor.addRoom(bedroom1);
+        firstFloor.addRoom(bedroom2);
+        firstFloor.addRoom(bathroom1stf);
+        
 
-        Level ground = new Level(roomsGround,"Ground Floor");
-        Level first = new Level(roomsFirst,"First Floor");
+        House myhouse = new House("MyHome");
         
-        Level levels[] = new Level[5];
-        levels[0] = ground;
-        levels[1] = first;
+        myhouse.addLevel(groundFloor);
+        myhouse.addLevel(firstFloor);
         
-        House house = new House(levels, "MyHome");
+        System.out.println(myhouse);
         
-        
-        
-        System.out.println(ground);
-        System.out.println(first);
-        
-        ground.switchAllOffRooms();
-        first.switchAllOffRooms();
-        
-        System.out.println(ground);
-        System.out.println(first);
         
         /*
         room.addDevice(new Device("Reynaldo", "LG", "123456", true));
