@@ -1,0 +1,10 @@
+Aire Acondicionado,LG,pm07sp
+Luces,Philips,Hue
+luces,Ahorradoras,34234
+luces,simple,354676
+lightbulb,the best,X3000
+Aire acondicionado, Mabe, Mmt12cdbs3
+Luces,Philips,EcoVantage
+Aire acondicionado, Hisense,AS-12CR5FVETD/1TR
+Luces,Ho Iluminacion,A19 60W Claro
+Luces,Alefco,lw100
