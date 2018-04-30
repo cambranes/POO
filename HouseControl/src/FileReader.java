@@ -45,7 +45,7 @@ public class FileReader {
     
     
     public static void main(String ar[]){
-        System.out.println(new FileReader("vices.txt").getContentFile());
+        System.out.println(new FileReader("Devices.txt").getContentFile());
     
     }
 }

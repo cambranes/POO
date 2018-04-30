@@ -10,12 +10,14 @@
  */
 public class Device {
     
+    private String IDDevice;
     private String name;
     private String brand;
     private String model;
     private boolean status;
     
-    public Device(String name, String brand, String model, boolean status){
+    public Device(String IDDevice, String name, String brand, String model, boolean status){
+        this.IDDevice = IDDevice;
         this.name = name;
         this.brand =  brand;
         this.model = model;

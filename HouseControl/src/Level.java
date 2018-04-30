@@ -15,13 +15,15 @@ public class Level {
     /*private int MAXROOMS = 5;
     private int roomCounter;
     private Room rooms[];*/
-    private ArrayList<Room> rooms;
     private String name;
+    private String IDLevel;
+    private ArrayList<Room> rooms;
     
 //Contructor dos parametros
-public Level(ArrayList<Room> rooms, String name){
-        this.rooms = rooms;
+public Level(String IDLevel, String name, ArrayList<Room> rooms){
+        this.IDLevel = IDLevel;
         this.name = name;
+        this.rooms = rooms;
     }
 
 //Constructor un parámetro

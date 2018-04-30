@@ -36,7 +36,7 @@ public class DeviceParsing {
     
     public void setDevices(String[] parsing){
         for(int i = 0; i<parsing.length; i=i+3){
-            devices.add(new Device(parsing[i], parsing[i+1], parsing[i+2], true));
+            devices.add(new Device(parsing[i], parsing[i+1], parsing[i+2], parsing[i+3], true));
         }
     }
     

@@ -16,11 +16,14 @@ public class Room {
     private int deviceCounter;
     private Device devices[];*/
     private ArrayList<Device> devices;
+    private String IDRoom;
     private String name;
     
     
     
-    public Room(ArrayList<Device> devices){
+    public Room(String IDRoom, String name, ArrayList<Device> devices){
+        this.IDRoom = IDRoom;
+        this.name = name;
         this.devices = devices;
         }
     
