@@ -2,7 +2,8 @@ public class Device {
     private int Id;
     private boolean Status;
     private String Name;
-    private Brand brand ;
+    //private Brand brand ;
+    private DeviceSpecs deviceSpecs;
 
     public Device() {
         this.Id = 0;
@@ -31,7 +32,6 @@ public class Device {
     }
 
     public Brand getBrand() {
-        //Me da ansiedad la ansiedad
         return brand;
     }
     
@@ -41,7 +41,6 @@ public class Device {
 
     public void setStatus(boolean status) {
         this.Status = status;
-        // UnU me da ansiedad usar Live Share
     }
     
     public void setName(String Name){
@@ -56,17 +55,15 @@ public class Device {
         output = "ID: " + this.Id +"\n" +
                 "Status: " + this.Status + "\n"+
                 "Name: " + this.Name + "\n" +
-                "Brand: " + this.brand + "\n";
+                "Brand: " + this.brand.getBrandName()+ "\n";
         return output;
     }
     public static void main(String[] args) {
         Brand brand = Brand.LG;
         Device device = new Device(0, true, "AC", brand);
-        System.out.println(Integer.toHexString(device.hashCode()));
+        
         System.out.println(device);
-        //System.out.println(device.toString());
-        //getClass().getName() + '@' + Integer.toHexString(hashCode())
- 
+        
     }
 
 }    
