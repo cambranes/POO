@@ -4,8 +4,24 @@ public class Main{
     Inventory inventory = new Inventory();
 
     inventory.createInventory();
-    Device device = new Device(0, true, "AC", brand);
-    inventory.search (device);
+    
+    DeviceSpecs espec = new DeviceSpecs(Brand.LG, "Model0", true, false);
+    Device device0 = new TV(0, true, "TV", espec, "HD");
+    
+    System.out.println(inventory.searchDevice(device0));
     
     }
 }
+/*
+
+ |\/\/\/|  
+ |      |  
+ |      |  
+ | (o)(o)  
+ C      _) 
+  | ,___|  
+  |   /    
+ /____\    
+/      \
+
+*/

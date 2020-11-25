@@ -2,21 +2,19 @@ public class Device {
     private int Id;
     private boolean Status;
     private String Name;
-    //private Brand brand ;
     private DeviceSpecs deviceSpecs;
 
     public Device() {
         this.Id = 0;
         this.Status = false;
         this.Name = null;
-        this.brand = null;
     }
 
-    public Device(int Id, boolean Status, String Name, Brand brand) {
+    public Device(int Id, boolean Status, String Name, DeviceSpecs deviceSpecs) {
         this.Id = Id;
         this.Status = Status;
         this.Name = Name;
-        this.brand = brand;
+        this.deviceSpecs = deviceSpecs;
     }
 
     public int getId() {
@@ -31,10 +29,6 @@ public class Device {
         return Name;
     }
 
-    public Brand getBrand() {
-        return brand;
-    }
-    
     public void setId(int id){
         this.Id = id;
     }
@@ -47,16 +41,37 @@ public class Device {
         this.Name = Name;
     }
     
-    public void setBrand(Brand brand){
-        this.brand = brand;
-    }
     public String toString(){
         String output;
         output = "ID: " + this.Id +"\n" +
                 "Status: " + this.Status + "\n"+
                 "Name: " + this.Name + "\n" +
-                "Brand: " + this.brand.getBrandName()+ "\n";
+                deviceSpecs.toString()+ "\n";
         return output;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        boolean result = false;
+        if((o != null) && (o instanceof Device)){
+            Device d = (Device) o;
+            if((Id == d.Id) && (Name.equals(d.Name))&&(deviceSpecs.equals(d.deviceSpecs))){
+                result = true;
+            }
+        }
+        return result;
+    }
+    /*
+    public static void main(String[] args) {
+        Brand brand = Brand.LG;
+        Device device = new Device(0, true, "AC", brand);
+        
+        System.out.println(device);
+        
+                result = true;
+            }
+        }
+        return result;
     }
     public static void main(String[] args) {
         Brand brand = Brand.LG;
@@ -64,6 +79,6 @@ public class Device {
         
         System.out.println(device);
         
-    }
+    }*/
 
 }    
