@@ -17,6 +17,11 @@ public class Lamp extends Device {
         return output;
     }
 
+    
+    /** 
+     * @param o
+     * @return boolean
+     */
     @Override
     public boolean equals(Object o) {
         if(o != null && o instanceof Lamp) {
