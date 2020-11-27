@@ -6,15 +6,27 @@ public class TV extends Device{
         this.panel = panel;
     }
 
+    
+    /** 
+     * @param panel
+     */
     public void setPanel(String panel) {
         this.panel = panel;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getPanel() {
         return panel;
     }
 
 
+    
+    /** 
+     * @return String
+     */
     public String toString() {
         String output = "";
 
@@ -22,6 +34,11 @@ public class TV extends Device{
 
         return output;
     }
+    
+    /** 
+     * @param o
+     * @return boolean
+     */
     public boolean equals(Object o){
         boolean result = false;
         
