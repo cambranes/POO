@@ -106,12 +106,19 @@ public class Device {
         }
         return result;
     }
+    
     public static void main(String[] args) {
-        Brand brand = Brand.LG;
-        Device device = new Device(0, true, "AC", brand);
+        DeviceSpecs espec = new DeviceSpecs(Brand.LG, "Model0", true, false);
+        Device device0 = new TV(0, true, "TV", espec, "HD");
+
+        DeviceSpecs espec2 = new DeviceSpecs(Brand.LG, "Model0", true, false);
+        Device device1 = new TV(0, true, "TV", espec2, "HD");
         
-        System.out.println(device);
-        
-    }*/
+        if( device0.equals( device1 ) ) System.out.println( ":D" );
+        else System.out.println( ":c" );
+        // No se ofendan pero teniamos que comprobarlo xd
+
+    }
+    */
 
 }    
