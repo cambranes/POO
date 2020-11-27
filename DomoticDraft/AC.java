@@ -34,4 +34,26 @@ public class AC extends Device{
 
         return output; 
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o != null && o instanceof AC) {
+            AC d = (AC) o;
+            if(temperature == d.temperature && super.equals(d)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Test Results
+/*     public static void main(String[] args) {
+        DeviceSpecs spec1 = new DeviceSpecs(Brand.PANASONIC, "033", true, true);
+        AC obj1 = new AC(1, false, "TV", spec1, 5);
+
+        DeviceSpecs spec2 = new DeviceSpecs(Brand.LG, "033", true, true);
+        AC obj2 = new AC(1, false, "TV", spec2, 5);
+
+        System.out.println(obj1.equals(obj2));
+    } */
 }
