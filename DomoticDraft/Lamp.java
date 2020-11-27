@@ -7,6 +7,10 @@ public class Lamp extends Device {
         this.Color=Color;
     }
     
+    
+    /** 
+     * @return String
+     */
     public String toString(){
         String output = " ";
         output = super.toString() + "Color: " + this.Color+ "\n";
