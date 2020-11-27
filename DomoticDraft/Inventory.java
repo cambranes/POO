@@ -5,11 +5,20 @@ public class Inventory{
         devices = new Device[6];
     }
 
+    
+    /** 
+     * @param device
+     */
     public void addDevice(Device device){
         devices = moreInventory(devices);
         devices[devices.length-1] = device;
     }
 
+    
+    /** 
+     * @param devices[]
+     * @return Device[]
+     */
     public Device[] moreInventory(Device devices[]){
         Device incMemory[] = new Device[devices.length+1];
 
@@ -19,6 +28,11 @@ public class Inventory{
         return incMemory;
     }
 
+    
+    /** 
+     * @param device
+     * @return int
+     */
     public int searchDevice(Device device){
         int index = -1;
         for (int i = 0; i < devices.length; i++){
@@ -30,6 +44,10 @@ public class Inventory{
         return index;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String toString(){
         String output = " ";
         for(int i = 0; i<devices.length; i++){
