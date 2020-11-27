@@ -17,30 +17,58 @@ public class Device {
         this.deviceSpecs = deviceSpecs;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getId() {
         return Id;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean getStatus(){
         return Status;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getName(){
         return Name;
     }
 
+    
+    /** 
+     * @param id
+     */
     public void setId(int id){
         this.Id = id;
     }
 
+    
+    /** 
+     * @param status
+     */
     public void setStatus(boolean status) {
         this.Status = status;
     }
     
+    
+    /** 
+     * @param Name
+     */
     public void setName(String Name){
         this.Name = Name;
     }
     
+    
+    /** 
+     * @return String
+     */
     public String toString(){
         String output;
         output = "ID: " + this.Id +"\n" +
@@ -50,6 +78,11 @@ public class Device {
         return output;
     }
 
+    
+    /** 
+     * @param o
+     * @return boolean
+     */
     @Override
     public boolean equals(Object o){
         boolean result = false;
