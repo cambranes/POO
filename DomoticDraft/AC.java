@@ -7,14 +7,26 @@ public class AC extends Device{
         this.temperature = temperature; 
     }
 
+    
+    /** 
+     * @param temperature
+     */
     public void setTemperature(int temperature){
         this.temperature = temperature; 
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getTemperature(){
         return temperature; 
     }
 
+    
+    /** 
+     * @return String
+     */
     public String toString(){
         String output = " "; 
 
