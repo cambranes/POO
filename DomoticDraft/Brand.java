@@ -19,9 +19,18 @@ public enum Brand{
         this.brandCode = brandCode;
     }
 */
+    /**
+     * 
+     * @return String
+     */
     public String getBrandName(){
         return brandName;
     }
+
+    /**
+     * 
+     * @return int
+     */
     public int getBrandCode(){
         return brandCode;
     }
