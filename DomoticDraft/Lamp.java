@@ -17,6 +17,28 @@ public class Lamp extends Device {
         return output;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if(o != null && o instanceof Lamp) {
+            Lamp d = (Lamp) o;
+            if(Color.equals(d.Color) && super.equals(d)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Test Equals
+
+/*     public static void main(String[] args) {
+        DeviceSpecs spec1 = new DeviceSpecs(Brand.LG, "033", true, true);
+        Lamp obj1 = new Lamp(1, false, "TV", spec1, "Green");
+
+        DeviceSpecs spec2 = new DeviceSpecs(Brand.LG, "033", true, true);
+        Lamp obj2 = new Lamp(1, false, "TV", spec2, "Blue");
+
+        System.out.println(obj1.equals(obj2));
+    } */
 
 }
 /*
